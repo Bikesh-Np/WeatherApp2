@@ -1,0 +1,321 @@
+/* Color Variables */
+:root {
+  --emerald-primary: #10b981;
+  --emerald-dark: #0d9c6f;
+  --emerald-light: #d1fae5;
+  --crimson-error: #ef4444;
+  --crimson-dark: #dc2626;
+  --slate-dark: #1e293b;
+  --slate-light: #f8fafc;
+  --gray-medium: #94a3b8;
+  --gray-pale: #e2e8f0;
+  --shadow-soft: 0 1px 3px rgba(0,0,0,0.1);
+  --shadow-medium: 0 4px 6px rgba(0,0,0,0.1);
+  --radius-small: 0.5rem;
+  --radius-medium: 0.75rem;
+}
+
+/* Main Container */
+.inventory-management-panel {
+  margin-left: 300px;
+  max-width: 1200px;
+  padding: 0 1.5rem;
+  font-family: 'Inter', system-ui, sans-serif;
+}
+
+/* Header Section */
+.inventory-header-section {
+  margin-bottom: 2.5rem;
+  text-align: center;
+}
+
+.inventory-title-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  margin-bottom: 0.5rem;
+}
+
+.inventory-icon {
+  font-size: 2rem;
+  color: var(--emerald-primary);
+}
+
+.inventory-main-title {
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--slate-dark);
+  margin: 0;
+}
+
+.inventory-subtitle {
+  color: var(--gray-medium);
+  font-size: 1rem;
+}
+
+/* Loading State */
+.inventory-loading-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 3rem;
+  background: white;
+  border-radius: var(--radius-medium);
+  box-shadow: var(--shadow-soft);
+}
+
+.inventory-spinner-animation {
+  width: 40px;
+  height: 40px;
+  border: 4px solid var(--emerald-light);
+  border-top: 4px solid var(--emerald-primary);
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin-bottom: 1rem;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Table Container */
+.product-table-container {
+  background: white;
+  border-radius: var(--radius-medium);
+  box-shadow: var(--shadow-medium);
+  overflow: hidden;
+}
+
+.table-responsive-wrapper {
+  overflow-x: auto;
+}
+
+.inventory-data-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+/* Table Header */
+.table-header-section th {
+  background: var(--emerald-primary);
+  color: white;
+  padding: 1.25rem 1rem;
+  text-align: left;
+  font-weight: 600;
+  text-transform: uppercase;
+  font-size: 0.8rem;
+  letter-spacing: 0.5px;
+}
+
+/* Table Rows */
+.product-data-row td {
+  padding: 1.25rem 1rem;
+  border-bottom: 1px solid var(--gray-pale);
+  vertical-align: middle;
+}
+
+.product-data-row:last-child td {
+  border-bottom: none;
+}
+
+.product-data-row:hover {
+  background-color: var(--emerald-light);
+}
+
+.row-editing-mode {
+  background-color: rgba(16, 185, 129, 0.1) !important;
+}
+
+/* Cell Styles */
+.product-name-text {
+  font-weight: 600;
+  color: var(--slate-dark);
+}
+
+.price-value {
+  font-weight: 700;
+  color: var(--emerald-dark);
+}
+
+.description-text {
+  color: var(--slate-dark);
+  font-size: 0.9rem;
+  line-height: 1.5;
+  margin: 0;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.category-badge {
+  background: var(--gray-pale);
+  color: var(--slate-dark);
+  padding: 0.35rem 0.75rem;
+  border-radius: 50px;
+  font-size: 0.8rem;
+  font-weight: 500;
+  display: inline-block;
+}
+
+/* Image Styles */
+.product-thumbnail-container {
+  width: 60px;
+  height: 60px;
+  border-radius: var(--radius-small);
+  overflow: hidden;
+  background: #f5f5f5;
+}
+
+.product-thumbnail {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.image-upload-control {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 0.75rem;
+  border: 1px dashed var(--gray-medium);
+  border-radius: var(--radius-small);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  min-height: 60px;
+}
+
+.image-upload-control:hover {
+  border-color: var(--emerald-primary);
+  background: var(--emerald-light);
+}
+
+.image-upload-control input {
+  display: none;
+}
+
+.upload-icon {
+  font-size: 1.2rem;
+  color: var(--emerald-primary);
+  margin-bottom: 0.25rem;
+}
+
+/* Form Fields */
+.inventory-edit-field {
+  width: 100%;
+  padding: 0.65rem;
+  border: 1px solid var(--gray-pale);
+  border-radius: var(--radius-small);
+  font-family: inherit;
+  font-size: 0.9rem;
+}
+
+.inventory-edit-field:focus {
+  outline: none;
+  border-color: var(--emerald-primary);
+  box-shadow: 0 0 0 2px rgba(16, 185, 129, 0.2);
+}
+
+.inventory-edit-textarea {
+  width: 100%;
+  min-height: 80px;
+  padding: 0.65rem;
+  border: 1px solid var(--gray-pale);
+  border-radius: var(--radius-small);
+  font-family: inherit;
+  font-size: 0.9rem;
+  resize: vertical;
+}
+
+/* Action Buttons */
+.view-mode-actions, .edit-mode-actions {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.edit-action-button, .delete-action-button,
+.confirm-edit-button, .cancel-edit-button {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.6rem 0.9rem;
+  border: none;
+  border-radius: var(--radius-small);
+  font-weight: 500;
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.edit-action-button {
+  background: var(--emerald-light);
+  color: var(--emerald-dark);
+}
+
+.edit-action-button:hover {
+  background: var(--emerald-primary);
+  color: white;
+  transform: translateY(-1px);
+}
+
+.delete-action-button {
+  background: rgba(239, 68, 68, 0.1);
+  color: var(--crimson-dark);
+}
+
+.delete-action-button:hover {
+  background: var(--crimson-error);
+  color: white;
+  transform: translateY(-1px);
+}
+
+.confirm-edit-button {
+  background: var(--emerald-primary);
+  color: white;
+}
+
+.confirm-edit-button:hover {
+  background: var(--emerald-dark);
+  transform: translateY(-1px);
+}
+
+.cancel-edit-button {
+  background: var(--gray-pale);
+  color: var(--slate-dark);
+}
+
+.cancel-edit-button:hover {
+  background: var(--gray-medium);
+  color: white;
+  transform: translateY(-1px);
+}
+
+.action-icon {
+  font-size: 0.9rem;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .inventory-management-panel {
+    padding: 0 1rem;
+  }
+  
+  .inventory-data-table {
+    min-width: 700px;
+  }
+  
+  .view-mode-actions, .edit-mode-actions {
+    flex-direction: column;
+    gap: 0.4rem;
+  }
+  
+  .edit-action-button, .delete-action-button,
+  .confirm-edit-button, .cancel-edit-button {
+    justify-content: center;
+    padding: 0.6rem;
+  }
+}

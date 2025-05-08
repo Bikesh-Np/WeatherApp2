@@ -1,0 +1,341 @@
+/* Base Styles */
+.aurora-register-section {
+  margin-top: -25px;
+  margin-bottom: -20px;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #e0f2e9 0%, #b2d8b6 100%);
+  padding: 2rem;
+}
+
+/* Glass Card Effects */
+.aurora-glass-card {
+  width: 100%;
+  max-width: 1200px;
+  background: rgba(255, 255, 255, 0.9);
+  backdrop-filter: blur(10px);
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+  display: flex;
+}
+
+.aurora-form-wrapper {
+  display: flex;
+  width: 100%;
+  min-height: 700px;
+}
+
+/* Hero Image Section */
+.aurora-hero-image {
+  flex: 1;
+  position: relative;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+}
+
+.aurora-hero-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.7;
+}
+
+.aurora-hero-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  text-align: center;
+  padding: 2rem;
+  background: rgba(0, 0, 0, 0.3);
+}
+
+.aurora-hero-title {
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.aurora-hero-text {
+  font-size: 1.2rem;
+  max-width: 400px;
+  line-height: 1.6;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+}
+
+/* Form Container */
+.aurora-form-container {
+  flex: 1;
+  padding: 3rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.aurora-form-header {
+  margin-bottom: 2rem;
+  text-align: center;
+}
+
+.aurora-form-title {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #2d3748;
+  margin-bottom: 1rem;
+}
+
+.aurora-form-divider {
+  height: 4px;
+  width: 60px;
+  background: linear-gradient(to right, #667eea, #764ba2);
+  margin: 0 auto;
+  border-radius: 2px;
+}
+
+/* Form Grid Layout */
+.aurora-register-form {
+  flex-grow: 1;
+}
+
+.aurora-form-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+/* Input Styles */
+.aurora-input-group {
+  margin-bottom: 1rem;
+}
+
+.aurora-input-label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: 600;
+  color: #4a5568;
+  font-size: 0.95rem;
+}
+
+.aurora-form-input {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+  background-color: #f8fafc;
+}
+
+.aurora-form-input:focus {
+  outline: none;
+  border-color: #667eea;
+  box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.2);
+  background-color: white;
+}
+
+/* File Input Styles */
+.aurora-file-input {
+  position: relative;
+}
+
+.aurora-file-hidden {
+  position: absolute;
+  opacity: 0;
+  width: 0.1px;
+  height: 0.1px;
+  overflow: hidden;
+}
+
+.aurora-file-label {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+.aurora-file-custom {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  border: 1px dashed #cbd5e0;
+  border-radius: 8px;
+  background-color: #f8fafc;
+  color: #718096;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  transition: all 0.3s ease;
+}
+
+.aurora-file-custom:hover {
+  border-color: #a0aec0;
+}
+
+/* Password Hint */
+.aurora-password-hint {
+  font-size: 0.75rem;
+  color: #718096;
+  margin-top: 0.25rem;
+}
+
+/* Submit Button */
+.aurora-submit-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  padding: 1rem;
+  background: linear-gradient(to right, #667eea, #764ba2);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-top: 1rem;
+}
+
+.aurora-submit-btn:hover {
+  background: linear-gradient(to right, #5a67d8, #6b46c1);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+}
+
+.aurora-btn-icon {
+  margin-left: 0.5rem;
+  transition: transform 0.3s ease;
+}
+
+.aurora-submit-btn:hover .aurora-btn-icon {
+  transform: translateX(3px);
+}
+
+/* Form Footer */
+.aurora-form-footer {
+  text-align: center;
+  margin-top: 2rem;
+}
+
+.aurora-footer-text {
+  color: #718096;
+}
+
+.aurora-footer-link {
+  color: #667eea;
+  font-weight: 600;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.aurora-footer-link:hover {
+  color: #5a67d8;
+  text-decoration: underline;
+}
+
+/* Success Modal */
+.aurora-success-modal .modal-content {
+  border: none;
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.aurora-modal-body {
+  padding: 3rem 2rem;
+}
+
+.aurora-success-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.aurora-success-icon {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  background: linear-gradient(to bottom right, #48bb78, #38a169);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1.5rem;
+}
+
+.aurora-checkmark {
+  width: 40px;
+  height: 40px;
+  fill: white;
+}
+
+.aurora-success-title {
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: #2d3748;
+  margin-bottom: 0.5rem;
+}
+
+.aurora-success-text {
+  color: #718096;
+  margin-bottom: 1.5rem;
+}
+
+.aurora-modal-btn {
+  background: linear-gradient(to right, #667eea, #764ba2);
+  border: none;
+  padding: 0.75rem 1.5rem;
+  border-radius: 8px;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.aurora-modal-btn:hover {
+  background: linear-gradient(to right, #5a67d8, #6b46c1);
+  transform: translateY(-2px);
+}
+
+/* Responsive Adjustments */
+@media (max-width: 992px) {
+  .aurora-glass-card {
+    flex-direction: column;
+  }
+  
+  .aurora-hero-image {
+    display: none;
+  }
+  
+  .aurora-form-container {
+    padding: 2rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .aurora-form-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .aurora-register-section {
+    padding: 1rem;
+  }
+}
+
+@media (max-width: 576px) {
+  .aurora-form-container {
+    padding: 1.5rem;
+  }
+  
+  .aurora-form-title {
+    font-size: 1.75rem;
+  }
+}

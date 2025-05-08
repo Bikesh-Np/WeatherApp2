@@ -1,0 +1,321 @@
+/* Base Styles */
+.eco-id-portal {
+  margin-bottom: -20px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+  min-height: 100vh;
+  padding: 2rem 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.eco-id-container {
+  width: 500px;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+/* Loading Screen */
+.eco-loading-screen {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background: rgba(255, 255, 255, 0.9);
+}
+
+.eco-spinner-container {
+  text-align: center;
+}
+
+.eco-spinner {
+  color: #28a745;
+  width: 3rem;
+  height: 3rem;
+  border-width: 0.25rem;
+}
+
+.eco-loading-text {
+  margin-top: 1rem;
+  color: #28a745;
+  font-weight: 500;
+}
+
+/* Error Screen */
+.eco-error-screen {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background: rgba(255, 255, 255, 0.9);
+}
+
+.eco-alert-container {
+  max-width: 500px;
+  text-align: center;
+}
+
+.eco-alert {
+  border-radius: 10px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.eco-back-btn {
+  margin-top: 1.5rem;
+  padding: 0.5rem 1.5rem;
+  font-weight: 500;
+}
+
+/* ID Card Styles */
+.eco-id-card-wrapper {
+  max-width: 600px;
+  margin: 0 auto 2rem;
+  perspective: 1000px;
+}
+
+.eco-id-card {
+  border-radius: 15px;
+  overflow: hidden;
+  border: none;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+  position: relative;
+  background: white;
+  transform-style: preserve-3d;
+  transition: transform 0.5s ease;
+}
+
+.eco-id-card:hover {
+  transform: translateY(-5px);
+}
+
+.eco-card-header {
+  background: linear-gradient(135deg, #28a745 0%, #218838 100%);
+  padding: 1.5rem;
+  position: relative;
+  color: white;
+  text-align: center;
+}
+
+.eco-card-watermark {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  opacity: 0.3;
+  font-size: 0.8rem;
+  display: flex;
+  align-items: center;
+}
+
+.watermark-icon {
+  margin-right: 5px;
+}
+
+.eco-card-title h2 {
+  font-weight: 700;
+  margin-bottom: 0.2rem;
+  letter-spacing: 1px;
+}
+
+.eco-card-title p {
+  font-size: 0.9rem;
+  opacity: 0.9;
+  margin-bottom: 0;
+}
+
+.eco-card-corner {
+  position: absolute;
+  width: 30px;
+  height: 30px;
+  border: 2px solid white;
+  opacity: 0.7;
+}
+
+.eco-corner-tl {
+  top: 10px;
+  left: 10px;
+  border-right: none;
+  border-bottom: none;
+}
+
+.eco-corner-tr {
+  top: 10px;
+  right: 10px;
+  border-left: none;
+  border-bottom: none;
+}
+
+.eco-card-body {
+  padding: 2rem;
+}
+
+.eco-avatar-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 1.5rem;
+}
+
+.eco-avatar-frame {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  border: 3px solid #28a745;
+  padding: 5px;
+  margin-bottom: 1rem;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  background: white;
+}
+
+.eco-avatar-image {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.eco-verified-badge {
+  padding: 0.3rem 0.8rem;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+}
+
+.eco-verified-badge.verified {
+  background-color: #d4edda;
+  color: #155724;
+}
+
+.eco-verified-badge.unverified {
+  background-color: #fff3cd;
+  color: #856404;
+}
+
+.eco-details-section {
+  text-align: center;
+}
+
+.eco-volunteer-name {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-bottom: 1.5rem;
+  color: #343a40;
+  letter-spacing: 0.5px;
+}
+
+.eco-details-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+  text-align: left;
+}
+
+.eco-detail-item {
+  margin-bottom: 0.5rem;
+}
+
+.eco-detail-label {
+  display: block;
+  font-size: 0.75rem;
+  color: #6c757d;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.eco-detail-value {
+  display: block;
+  font-size: 0.95rem;
+  color: #495057;
+  font-weight: 500;
+  word-break: break-word;
+}
+
+.eco-card-footer {
+  background: #f8f9fa;
+  padding: 1rem 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-top: 1px solid #e9ecef;
+}
+
+.eco-id-number {
+  font-size: 0.85rem;
+  color: #6c757d;
+  font-weight: 600;
+}
+
+.eco-organization-signature {
+  font-size: 0.9rem;
+  color: #28a745;
+  font-weight: 700;
+  font-style: italic;
+}
+
+/* Action Panel */
+.eco-action-panel {
+  display: flex;
+  justify-content: center;
+  margin-top: 2rem;
+}
+
+.eco-back-btn, .eco-download-btn {
+  padding: 0.6rem 1.5rem;
+  font-weight: 500;
+  border-radius: 50px;
+  transition: all 0.3s ease;
+  display: inline-flex;
+  align-items: center;
+}
+
+.eco-download-btn {
+  background-color: #28a745;
+  border-color: #28a745;
+}
+
+.eco-download-btn:hover {
+  background-color: #218838;
+  border-color: #1e7e34;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+  .eco-details-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .eco-id-card {
+    margin: 0 1rem;
+  }
+  
+  .eco-action-panel {
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .eco-download-btn {
+    margin-top: 1rem;
+    margin-left: 0 !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .eco-card-body {
+    padding: 1.5rem;
+  }
+  
+  .eco-avatar-frame {
+    width: 100px;
+    height: 100px;
+  }
+  
+  .eco-volunteer-name {
+    font-size: 1.3rem;
+  }
+}

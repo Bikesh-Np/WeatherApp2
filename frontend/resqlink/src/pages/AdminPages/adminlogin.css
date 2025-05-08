@@ -1,0 +1,307 @@
+/* Secure Admin Login Theme - Green */
+.secure-admin-section {
+  margin-top: -40px;
+  margin-bottom: -20px;
+  height: 750px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #0a3d2e 0%, #1e7d5e 100%);
+  padding: 2rem;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.secure-admin-glass {
+  margin-top: 10px;
+  height: 600px;
+  width: 100%;
+  max-width: 450px;
+  background: rgba(255, 255, 255, 0.12);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  transition: transform 0.3s ease;
+}
+
+.secure-admin-glass:hover {
+  transform: translateY(-5px);
+}
+
+.secure-admin-wrapper {
+  padding: 3rem 2.5rem;
+}
+
+/* Header Styles */
+.secure-admin-header {
+  text-align: center;
+  margin-bottom: 2.5rem;
+}
+
+.secure-admin-logo {
+  margin-left: 130px;
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 15px;
+  position: relative;
+  overflow: hidden;
+}
+
+.secure-admin-glow {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(46, 213, 115, 0.4) 0%, transparent 70%);
+  animation: pulse 3s infinite;
+  z-index: 0;
+}
+
+@keyframes pulse {
+  0% { opacity: 0.4; }
+  50% { opacity: 0.8; }
+  100% { opacity: 0.4; }
+}
+
+.secure-admin-img {
+  max-width: 100%;
+  max-height: 100%;
+  filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.3));
+  z-index: 1;
+}
+
+.secure-admin-title {
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: white;
+  margin-bottom: 0.5rem;
+  letter-spacing: 0.5px;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.secure-admin-subtitle {
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 0.95rem;
+  letter-spacing: 1px;
+  margin: 0;
+}
+
+/* Form Styles */
+.secure-admin-form {
+  margin-bottom: 2rem;
+}
+
+.secure-input-group {
+  margin-bottom: 1.5rem;
+}
+
+.secure-input-label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 0.9rem;
+  display: flex;
+  align-items: center;
+}
+
+.secure-admin-input {
+  width: 100%;
+  padding: 0.8rem 1.2rem;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 8px;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+  background: rgba(255, 255, 255, 0.08);
+  color: white;
+}
+
+.secure-admin-input:focus {
+  outline: none;
+  border-color: #2ed573;
+  box-shadow: 0 0 0 3px rgba(46, 213, 115, 0.3);
+  background: rgba(255, 255, 255, 0.12);
+}
+
+/* Button Styles */
+.secure-auth-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  padding: 1rem;
+  background: linear-gradient(to right, #20bf6b, #2ed573);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-top: 1.5rem;
+  letter-spacing: 0.5px;
+  box-shadow: 0 4px 15px rgba(46, 213, 115, 0.3);
+  position: relative;
+  overflow: hidden;
+}
+
+.secure-auth-btn:hover:not(:disabled) {
+  background: linear-gradient(to right, #2ed573, #20bf6b);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(46, 213, 115, 0.4);
+}
+
+.secure-auth-btn:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+.secure-btn-icon {
+  margin-left: 0.5rem;
+  transition: transform 0.3s ease;
+  font-size: 1.2rem;
+}
+
+.secure-auth-btn:hover .secure-btn-icon {
+  transform: translateX(3px);
+}
+
+.secure-spinner {
+  width: 20px;
+  height: 20px;
+  border: 3px solid rgba(255, 255, 255, 0.3);
+  border-radius: 50%;
+  border-top-color: white;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* Security Notice */
+.secure-admin-notice {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.2);
+  padding: 0.8rem;
+  border-radius: 8px;
+  margin-top: 1.5rem;
+}
+
+.secure-admin-notice p {
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 0.85rem;
+  margin: 0;
+}
+
+.secure-shield-icon {
+  color: #2ed573;
+  margin-right: 0.5rem;
+  font-size: 1.2rem;
+}
+
+/* Success Modal */
+.secure-success-modal .modal-content {
+  background: #1e3b32;
+  border: none;
+  border-radius: 16px;
+  overflow: hidden;
+  color: white;
+  border: 1px solid rgba(46, 213, 115, 0.3);
+}
+
+.secure-modal-body {
+  padding: 3rem 2rem;
+}
+
+.secure-verified-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.secure-verified-badge {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  background: rgba(46, 213, 115, 0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1.5rem;
+  border: 2px solid #2ed573;
+}
+
+.secure-checkmark {
+  width: 40px;
+  height: 40px;
+  fill: #2ed573;
+}
+
+.secure-verified-title {
+  font-size: 1.75rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+  color: white;
+}
+
+.secure-verified-text {
+  color: rgba(255, 255, 255, 0.8);
+  margin-bottom: 1.5rem;
+}
+
+.secure-dashboard-btn {
+  background: linear-gradient(to right, #20bf6b, #2ed573);
+  border: none;
+  padding: 0.75rem 1.5rem;
+  border-radius: 8px;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  color: white;
+}
+
+.secure-dashboard-btn:hover {
+  background: linear-gradient(to right, #2ed573, #20bf6b);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(46, 213, 115, 0.3);
+}
+
+/* Responsive Adjustments */
+@media (max-width: 576px) {
+  .secure-admin-wrapper {
+    padding: 2rem 1.5rem;
+  }
+  
+  .secure-admin-title {
+    font-size: 1.6rem;
+  }
+  
+  .secure-admin-logo {
+    width: 80px;
+    height: 80px;
+  }
+}
+
+/* Accessibility Improvements */
+.secure-admin-input::placeholder {
+  color: rgba(255, 255, 255, 0.5);
+  opacity: 1;
+}
+
+.secure-admin-input:-webkit-autofill,
+.secure-admin-input:-webkit-autofill:hover, 
+.secure-admin-input:-webkit-autofill:focus {
+  -webkit-text-fill-color: white;
+  -webkit-box-shadow: 0 0 0px 1000px rgba(46, 213, 115, 0.1) inset;
+  transition: background-color 5000s ease-in-out 0s;
+}

@@ -1,0 +1,187 @@
+/* General Body Style */
+body {
+    font-family: 'Roboto', sans-serif;
+    background-color: #f4f7fa;
+    color: #333;
+  }
+  
+  /* Payment Container */
+  .payment-container {
+    margin-top: 5px;
+    margin-bottom: 50px;
+    padding: 30px;
+    background-color: #ffffff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+  }
+  
+  /* Header Styling */
+  h2 {
+    font-size: 2rem;
+    font-weight: 600;
+    color: #1c354d;
+    text-align: center;
+    margin-bottom: 40px;
+  }
+  
+  /* Left Section: Product carde */
+  .cardee {
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  }
+  
+  .carde img {
+    border-radius: 8px;
+    object-fit: cover;
+    height: 250px;
+    width: 100%;
+  }
+  
+  .carde-body {
+    padding: 20px;
+    text-align: center;
+  }
+  
+  .carde-body h5 {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: #333;
+  }
+  
+  .carde-body p {
+    font-size: 0.9rem;
+    color: #777;
+    margin: 10px 0;
+  }
+  
+  .carde-body h6 {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: #28a745;
+  }
+  
+  /* Right Section: Payment Form */
+  .payment-form {
+    background-color: #f8f9fa;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  }
+  
+  .payment-form .form-label {
+    font-weight: 500;
+    color: #333;
+  }
+  
+  .payment-form .form-control {
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    padding: 12px;
+    margin-bottom: 15px;
+    font-size: 1rem;
+  }
+  
+  .payment-form .form-control:focus {
+    border-color: #2aad25;
+    box-shadow: 0 0 5px rgba(72, 212, 100, 0.5);
+  }
+  
+  .payment-form .btn {
+    border-radius: 8px;
+    padding: 12px;
+    font-size: 1.1rem;
+    font-weight: 600;
+  }
+  
+  /* E-Sewa Payment Button */
+  .payment-form .btn-primary {
+    background-color: #28a745;
+    border-color: #28a745;
+    transition: background-color 0.3s;
+  }
+  
+  .payment-form .btn-primary:hover {
+    background-color: #218838;
+    border-color: #1e7e34;
+  }
+  
+  /* Quantity Container */
+  .quantity-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .quantity-container button {
+    border: none;
+    background-color: transparent;
+    font-size: 1.5rem;
+    color: #4edc5e;
+    cursor: pointer;
+    padding: 8px 12px;
+  }
+  
+  .quantity-container input {
+    width: 50px;
+    text-align: center;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    margin: 0 10px;
+    font-size: 1rem;
+    padding: 5px;
+  }
+  
+  /* Loading Overlay */
+  .loading-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    font-size: 1.5rem;
+    z-index: 1000;
+  }
+  
+  .loading-overlay .spinner-border {
+    margin-bottom: 20px;
+    width: 4rem;
+    height: 4rem;
+  }
+  
+  .loading-overlay .loading-text {
+    font-weight: 600;
+  }
+  
+  .loading-text {
+    margin-top: 10px;
+    font-size: 1.5rem;
+    color: #26ca36;
+  }
+  
+  
+  /* Responsive Styles */
+  @media (max-width: 768px) {
+    .payment-container {
+      padding: 20px;
+    }
+  
+    .payment-form {
+      padding: 20px;
+    }
+  
+    .carde-body h5 {
+      font-size: 1rem;
+    }
+  
+    .carde-body h6 {
+      font-size: 1rem;
+    }
+  }
+  

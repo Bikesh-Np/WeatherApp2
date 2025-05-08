@@ -1,0 +1,234 @@
+/* Main Container Styles */
+.volunteer-gateway {
+    margin-top: -40px;
+    margin-bottom: -50px;
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #f8fbf8;
+    overflow: hidden;
+    padding: 2rem;
+  }
+  
+  .eco-backdrop {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, rgba(46, 125, 50, 0.05) 0%, rgba(129, 199, 132, 0.05) 100%);
+    z-index: 0;
+  }
+  
+  /* Portal Containers */
+  .green-portal-container {
+    display: flex;
+    max-width: 1000px;
+    width: 100%;
+    min-height: 600px;
+    background: white;
+    border-radius: 20px;
+    box-shadow: 0 15px 40px rgba(0, 64, 32, 0.12);
+    overflow: hidden;
+    z-index: 1;
+  }
+  
+  /* Nature Side Panel */
+  .nature-side-panel {
+    flex: 1;
+    background: linear-gradient(160deg, #2e7d32 0%, #66bb6a 100%);
+    padding: 3rem 2rem;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+  }
+  
+  .eco-brand {
+    display: flex;
+    align-items: center;
+    margin-bottom: 2rem;
+  }
+  
+  .eco-brand h2 {
+    margin-bottom: -400px;
+    font-weight: 700;
+    margin-left: 1rem;
+    font-size: 1.8rem;
+  }
+  
+  .portal-icon {
+    margin-bottom: -360px;
+    font-size: 2.5rem;
+  }
+  
+  .portal-tagline {
+    margin-bottom: -400px;
+    font-size: 1.1rem;
+    opacity: 0.9;
+  }
+  
+  .eco-illustration {
+    
+    flex-grow: 1;
+    background-image: url('https://illustrations.popsy.co/green/plant-growing.svg');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+    opacity: 0.8;
+    margin: 2rem 0;
+  }
+  
+  /* Access Panel */
+  .access-panel {
+    flex: 1;
+    padding: 3rem 2.5rem;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .portal-header {
+    text-align: center;
+    margin-bottom: 2.5rem;
+  }
+  
+  .access-icon {
+    font-size: 2.5rem;
+    color: #2e7d32;
+    margin-bottom: 1rem;
+  }
+  
+  .portal-header h3 {
+    font-weight: 700;
+    color: #2e7d32;
+    margin-bottom: 0.5rem;
+  }
+  
+  .portal-header p {
+    color: #666;
+    font-size: 0.95rem;
+  }
+  
+  /* Form Styles */
+  .gateway-form {
+    flex-grow: 1;
+  }
+  
+  .form-field-group {
+    position: relative;
+    margin-bottom: 1.8rem;
+  }
+  
+  .input-ic {
+    position: absolute;
+    left: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #66bb6a;
+    font-size: 1.1rem;
+  }
+  
+  .eco-input {
+    width: 100%;
+    padding: 12px 20px 12px 45px;
+    border: 2px solid #e0f2e0;
+    border-radius: 10px;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    background-color: #f8fbf8;
+  }
+  
+  .eco-input:focus {
+    border-color: #66bb6a;
+    box-shadow: 0 0 0 3px rgba(102, 187, 106, 0.2);
+    outline: none;
+    background-color: white;
+  }
+  
+  /* Button Styles */
+  .portal-submit-btn {
+    width: 100%;
+    padding: 14px;
+    background: linear-gradient(to right, #2e7d32, #4caf50);
+    border: none;
+    border-radius: 10px;
+    color: white;
+    font-weight: 600;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-top: 1rem;
+    box-shadow: 0 4px 15px rgba(46, 125, 50, 0.3);
+  }
+  
+  .portal-submit-btn:hover {
+    background: linear-gradient(to right, #1b5e20, #2e7d32);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(46, 125, 50, 0.4);
+  }
+  
+  .portal-submit-btn:active {
+    transform: translateY(0);
+  }
+  
+  /* Footer Links */
+  .portal-footer {
+    text-align: center;
+    margin-top: 2rem;
+    font-size: 0.9rem;
+    color: #666;
+  }
+  
+  .portal-link {
+    color: #2e7d32;
+    font-weight: 500;
+    text-decoration: none;
+    transition: all 0.2s ease;
+  }
+  
+  .portal-link:hover {
+    color: #1b5e20;
+    text-decoration: underline;
+  }
+  
+  /* Alert Styles */
+  .portal-alert {
+    border-radius: 8px;
+    margin-bottom: 1.5rem;
+  }
+  
+  /* Responsive Design */
+  @media (max-width: 768px) {
+    .green-portal-container {
+      flex-direction: column;
+      min-height: auto;
+    }
+    
+    .nature-side-panel {
+      padding: 2rem 1.5rem;
+    }
+    
+    .eco-illustration {
+      display: none;
+    }
+    
+    .access-panel {
+      padding: 2rem 1.5rem;
+    }
+  }
+  
+  /* Animation Effects */
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  
+  .access-panel > * {
+    animation: fadeIn 0.6s ease forwards;
+  }
+  
+  .portal-header { animation-delay: 0.1s; }
+  .gateway-form { animation-delay: 0.2s; }
+  .portal-footer { animation-delay: 0.3s; }

@@ -1,0 +1,141 @@
+
+* {
+  font-family: 'Poppins', sans-serif;
+}
+
+/* ✨ Navbar Styling */
+.navbar {
+  background: linear-gradient(to right, #1c354d, #1c354d);  /* Dark gradient background */
+  backdrop-filter: blur(12px);
+  padding: 15px 25px;
+  border-bottom: 2px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+/* 🎨 Brand Logo & Text */
+.navbar-brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.navbar-brand img {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  object-fit: cover;
+  transition: transform 0.3s ease-in-out;
+}
+
+.navbar-brand:hover img {
+  transform: rotate(10deg);
+}
+
+.brand-text {
+  font-size: 1.6rem;
+  font-weight: 600;
+  color: #ffffff;
+  letter-spacing: 1px;
+}
+
+/* 🌟 Navbar Links */
+.navbar-nav .nav-link {
+
+  color: #ffffff !important;
+  font-size: 1rem;
+  font-weight: 500;
+  margin-right: 35px;
+  position: relative;
+  transition: color 0.3s ease-in-out;
+}
+
+.navbar-nav .nav-link::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: -5px;
+  width: 0;
+  height: 2px;
+  background: #4CAF50;  /* Green Hover Effect */
+  transition: width 0.3s ease-in-out, left 0.3s ease-in-out;
+}
+
+.navbar-nav .nav-link:hover::after {
+  width: 100%;
+  left: 0;
+}
+
+.navbar-nav .nav-link:hover {
+  color: #4CAF50 !important;  /* Green Hover Effect */
+}
+
+/* 📌 Dropdown Menu */
+.navbar-nav .dropdown-menu {
+  margin-right: 10px;
+  background: rgba(34, 34, 34, 0.9);
+  border-radius: 10px;
+  border: none;
+  padding: 10px 0;
+  box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.4);
+  animation: fadeIn 0.2s ease-in-out;
+}
+
+.navbar-nav .dropdown-item {
+  color: #ffffff !important;
+  font-size: 0.95rem;
+  padding: 12px 20px;
+  transition: 0.3s;
+}
+
+.navbar-nav .dropdown-item:hover {
+  background-color: #4CAF50 !important;  /* Green Hover Effect */
+  color: #000 !important;
+}
+
+/* 🔥 Mobile Responsive */
+@media (max-width: 992px) {
+  .navbar-nav {
+    text-align: center;
+  }
+
+  .navbar-toggler {
+    border: none !important;
+    outline: none !important;
+  }
+
+  .navbar-toggler-icon {
+    filter: invert(100%);
+  }
+
+  .profile-container {
+    justify-content: center;
+  }
+}
+
+/* ✨ Dropdown Fade-in Animation */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-5px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+/* Add to your existing header.css */
+.nav-link svg, .dropdown-item svg {
+  transition: transform 0.2s ease;
+}
+
+.nav-link:hover svg, .dropdown-item:hover svg {
+  transform: scale(1.1);
+  color: var(--bs-primary);
+}
+
+/* Leaf icon in brand */
+.brand-text svg {
+  color: #4CAF50;
+  margin-bottom: 2px;
+}
+

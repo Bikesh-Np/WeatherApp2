@@ -1,0 +1,406 @@
+
+/* headers */
+.navbar{
+  background: linear-gradient(to right, #1c354d, #1c354d);  /* Dark gradient background */
+}
+.navbar-brand img {
+  border-radius: 90%; /* Optional: Makes the logo circular */
+}
+
+.navbar-dark .navbar-brand {
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+/* Increase logo size and add styling  */
+.brand-text {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #ffffff;
+}
+
+.brand-text:hover {
+  color: #28a745;
+}
+
+
+.nav-link:hover {
+  color: #28a745 !important; 
+}
+
+
+.navbar-brand {
+  display: flex;
+  align-items: center;
+  position: absolute;  
+  left: 15px;  
+  top: 50%;    
+  transform: translateY(-50%); 
+}
+
+.navbar-brand img {
+  border-radius: 50%; 
+  object-fit: cover;
+}
+
+
+.navbar {
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+  height: 4rem;
+}
+
+/* footer */
+
+footer {
+  background: linear-gradient(to right, #1c354d, #1c354d);  
+  color: #ecf0f1;  
+  padding: 40px 0;
+  font-family: "Arial", sans-serif;
+  text-align: center;
+}
+
+footer h5 {
+  font-size: 1.75rem;
+  font-weight: bold;
+  margin-bottom: 15px;
+  color: #7adf27; 
+}
+
+footer p, footer ul {
+  font-size: 14px;
+  line-height: 1.7;
+  margin-bottom: 15px;
+}
+
+footer a {
+  text-decoration: none;
+  color: #ecf0f1;
+  transition: color 0.3s ease; /* Smooth transition for hover effect */
+}
+
+footer a:hover {
+  color: #7adf27; /* Green hover effect */
+  text-decoration: underline; /* Add underline effect on hover */
+}
+
+/* Social Media Icons */
+footer .social-icons {
+  margin: 20px 0;
+}
+
+footer .social-icons a {
+  margin: 0 15px;
+  font-size: 24px;
+  transition: transform 0.3s ease-in-out; /* Smooth transformation */
+}
+
+footer .social-icons a:hover {
+  transform: scale(1.2); /* Slightly enlarges the icons on hover */
+  color: #7adf27;
+}
+
+/* Horizontal Divider Styling */
+footer hr {
+  border: 0;
+  height: 1px;
+  background: #7adf27; /* Green divider */
+  width: 80%;
+  margin: 20px auto;
+}
+
+/* Footer Links and Layout */
+footer .footer-links ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+footer .footer-links li {
+  margin: 10px 0;
+}
+
+footer .footer-links a {
+  color: #ecf0f1;
+  font-size: 16px;
+  transition: color 0.3s ease;
+}
+
+footer .footer-links a:hover {
+  color: #7adf27; /* Green hover effect */
+}
+
+/* Media Query for Responsiveness */
+@media (max-width: 768px) {
+  footer .social-icons a {
+    font-size: 20px;
+    margin: 0 10px;
+  }
+
+  footer h5 {
+    font-size: 1.5rem;
+  }
+
+  footer p, footer ul {
+    font-size: 12px;
+  }
+}
+
+/* product lists */
+
+/* Shrink and shift table to the right */
+.table-container {
+  width: 90%;
+  margin-right: -150px; /* Shifts the table to the right */
+  float: right; /* Aligns the table to the right */
+}
+
+/* Reduce table size */
+.small-table {
+  width: 78%; /* Shrinks table width */
+}
+
+/* Product image styling */
+.product-image {
+  width: 50px;
+  height: 50px;
+  object-fit: cover;
+  border-radius: 4px;
+  border: 1px solid #ddd;
+}
+
+/* Action link styles */
+.action-link {
+  font-size: 14px;
+  font-weight: bold;
+  padding: 6px 12px;
+  text-decoration: none;
+  border-radius: 4px;
+  transition: all 0.3s ease;
+  display: inline-block;
+}
+
+.edit-link {
+  color: #fff;
+  background-color: #007bff;
+  border: 1px solid #007bff;
+  margin-bottom: 10px; /* Space between buttons */
+}
+
+.edit-link:hover {
+  background-color: #0056b3;
+  border-color: #0056b3;
+}
+
+.delete-link {
+  color: #fff;
+  background-color: #dc3545;
+  border: 1px solid #dc3545;
+}
+
+.delete-link:hover {
+  background-color: #c82333;
+  border-color: #c82333;
+}
+
+/* Stack buttons vertically */
+.action-link {
+  display: block; /* Makes the buttons take up full width of the container */
+  width: 100%; /* Ensures buttons span the container width */
+}
+
+/* Optional: Add some space between the "Edit" and "Delete" buttons */
+.action-link + .action-link {
+  margin-top: 10px; /* Adds space between stacked buttons */
+}
+
+
+
+/* for add product Form Container */
+.form-container {
+  max-width: 900px; /* Set a fixed width for better alignment */
+  margin: 0 auto; /* Center the form horizontally */
+  padding: 20px; /* Add padding around the form */
+  background-color: #f8f9fa; /* Light gray background */
+  border: 1px solid #dee2e6; /* Light border for definition */
+  border-radius: 10px; /* Rounded corners */
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+}
+
+/* Form Title */
+.form-title {
+  text-align: center; /* Center the title */
+  font-size: 24px; /* Adjust font size */
+  font-weight: bold; /* Bold font */
+  margin-bottom: 20px; /* Space between title and form */
+  color: #343a40; /* Title color */
+}
+
+/* Form Inputs */
+.form-control,
+.form-select {
+  border-radius: 5px; /* Rounded input borders */
+  box-shadow: inset 0px 1px 3px rgba(0, 0, 0, 0.1); /* Subtle inset shadow */
+}
+
+/* Submit Button */
+.btn-primary {
+  width: 100%; /* Full width button */
+  font-size: 16px; /* Larger font for readability */
+  padding: 10px; /* Add more padding for comfort */
+  margin-top: 10px; /* Space between the button and the last input */
+}
+
+
+.table-cont {
+  margin: 0 auto; /* Centers the table on the page */
+  width: 80%; /* Adjust table width */
+}
+
+.category-list-title {
+  font-size: 1.5rem;
+  font-weight: bold;
+  text-align: center;
+  color: #333;
+}
+
+.small-ttable {
+  max-width: 600px; /* Shrink the table for a compact view */
+  margin: 0 auto;
+}
+
+.action-link {
+  font-weight: bold;
+  text-decoration: none;
+  padding: 5px 10px;
+  border-radius: 5px;
+}
+
+.edit-link {
+  color: #fff;
+  background-color: #007bff;
+  transition: background-color 0.3s;
+}
+
+.edit-link:hover {
+  background-color: #0056b3;
+}
+
+.delete-link {
+  color: #fff;
+  background-color: #dc3545;
+  transition: background-color 0.3s;
+}
+
+.delete-link:hover {
+  background-color: #a71d2a;
+}
+
+
+/* Full-height section for the registration form */
+.vh-100 {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+/* Prevent overlap with footer */
+.container {
+  padding-bottom: -20rem;
+}
+
+/* Footer styles */
+footer {
+  background-color: #001f3f;
+  color: #ffffff;
+  text-align: center;
+  padding: 1rem 0;
+  position: relative;
+  width: 100%;
+}
+
+
+
+/* Global Styles */
+body {
+  background-color: #f8f9fa; /* Light background for the page */
+  font-family: 'Roboto', sans-serif; /* Modern font */
+  margin: 0;
+  padding: 0;
+  height: 100vh;
+}
+
+/* Green Background for Login Sections */
+section.vh-100 {
+  background-color: #28a745; /* Green background */
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Card Styles */
+.card {
+  border-radius: 10px;
+  background-color: #ffffff; /* White background for the card */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Subtle shadow for depth */
+}
+
+.card-body {
+  padding: 2rem;
+}
+
+/* Logo Styles */
+.img-fluid {
+  max-width: 100%;
+  height: auto;
+  margin-bottom: 1rem;
+}
+
+/* Input Styles */
+.form-control-lg {
+  border-radius: 5px;
+  border: 1px solid #ced4da;
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
+}
+
+.form-control-lg:focus {
+  border-color: #28a745;
+  box-shadow: 0 0 5px rgba(40, 167, 69, 0.5);
+}
+
+/* Button Style */
+.btn-primary {
+  background-color: #007bff;
+  border-color: #007bff;
+  padding: 0.75rem;
+  font-size: 1.2rem;
+  font-weight: bold;
+  border-radius: 5px;
+}
+
+.btn-primary:hover {
+  background-color: #0056b3;
+  border-color: #004085;
+}
+
+/* Footer Links */
+.text-muted {
+  color: #6c757d !important;
+}
+
+.text-center p {
+  font-size: 0.9rem;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .card {
+    margin: 1rem;
+  }
+}
+
+

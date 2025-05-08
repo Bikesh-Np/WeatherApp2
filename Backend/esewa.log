@@ -1,0 +1,2 @@
+2025-01-20 15:00:20,004 - INFO - Received POST request to initiate payment.
+2025-01-20 15:00:20,004 - INFO - Payment initiated for ref_id=2, amount=8.0
