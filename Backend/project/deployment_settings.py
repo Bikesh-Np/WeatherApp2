@@ -22,7 +22,7 @@ MIDDLEWARE = [
 ]
 
 CORS_ALLOWED_ORIGINS = [
-    'https://resqlink-frontend.onrender.com'
+    'https://resqlink-frontend.onrender.com/'
 ]
 
 STORAGES = {
