@@ -82,6 +82,9 @@ const Sidebar = () => {
               }
             </div>
             <ul className="submenu-items">
+            <li className={isActive("/admin/listvolunteer") ? "active" : ""}>
+                <Link to="/admin/listvolunteer">Volunteers List</Link>
+              </li>
               <li className={isActive("/admin/assignvol") ? "active" : ""}>
                 <Link to="/admin/assignvol">Assign volunteers</Link>
               </li>

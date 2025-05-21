@@ -18,8 +18,8 @@
   /* Main Containers */
   .category-management-panel {
     max-width: 800px;
-    margin-top: 10px;
-    margin-left: 400px;
+    margin-top: 20px;
+    margin-left: 500px;
     padding: 0 1.5rem;
     font-family: 'Inter', system-ui, sans-serif;
   }

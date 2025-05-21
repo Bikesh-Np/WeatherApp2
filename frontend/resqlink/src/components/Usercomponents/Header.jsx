@@ -113,9 +113,9 @@ const Header = () => {
               <NavDropdown.Item href="/profile" className="d-flex align-items-center">
                 <FiUser className="me-2" /> Profile
               </NavDropdown.Item>
-              <NavDropdown.Item href="#notifications" className="d-flex align-items-center">
+              {/* <NavDropdown.Item href="#notifications" className="d-flex align-items-center">
                 <FiBell className="me-2" /> Notifications
-              </NavDropdown.Item>
+              </NavDropdown.Item> */}
               <NavDropdown.Divider />
               <NavDropdown.Item onClick={handleLogout} className="d-flex align-items-center">
                 <FiLogOut className="me-2" /> Logout

@@ -573,7 +573,7 @@ input:checked + .toggle-slider:before {
   cursor: pointer;
 }
 
-/* Responsive Design */
+/* Responsive Designs */
 @media (max-width: 768px) {
   .emerald-admin-container {
     padding: 1rem;

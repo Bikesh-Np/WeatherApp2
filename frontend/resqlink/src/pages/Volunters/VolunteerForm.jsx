@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
-import './VolunteerForm.css';
+import "./VolunteerForm.css";
 
 const VolunteerForm = () => {
   const [formData, setFormData] = useState({
@@ -9,7 +9,7 @@ const VolunteerForm = () => {
     username: "",
     first_name: "",
     last_name: "",
-    address:"",
+    address: "",
     dob: "",
     doa: "",
     phone: "",
@@ -28,15 +28,15 @@ const VolunteerForm = () => {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    
+
     // Special handling for phone number to ensure only digits and limit to 10
     if (name === "phone") {
-      if (value === "" || (/^\d{0,10}$/.test(value))) {
+      if (value === "" || /^\d{0,10}$/.test(value)) {
         setFormData({ ...formData, [name]: value });
       }
       return;
     }
-    
+
     setFormData({ ...formData, [name]: value });
   };
 
@@ -61,7 +61,8 @@ const VolunteerForm = () => {
     const birthDate = new Date(formData.dob);
     const age = today.getFullYear() - birthDate.getFullYear();
     const m = today.getMonth() - birthDate.getMonth();
-    const isBeforeBirthday = m < 0 || (m === 0 && today.getDate() < birthDate.getDate());
+    const isBeforeBirthday =
+      m < 0 || (m === 0 && today.getDate() < birthDate.getDate());
 
     const finalAge = isBeforeBirthday ? age - 1 : age;
 
@@ -121,20 +122,30 @@ const VolunteerForm = () => {
       <div className="volunteer-form-container">
         <div className="form-header">
           <h2 className="form-title">Join Our Volunteer Community</h2>
-          <p className="form-subtitle">Make a difference by sharing your skills and time</p>
+          <p className="form-subtitle">
+            Make a difference by sharing your skills and time
+          </p>
         </div>
 
         {message && (
           <div className="alert alert-success alert-dismissible fade show">
             {message}
-            <button type="button" className="btn-close" onClick={() => setMessage("")}></button>
+            <button
+              type="button"
+              className="btn-close"
+              onClick={() => setMessage("")}
+            ></button>
           </div>
         )}
 
         {error && (
           <div className="alert alert-danger alert-dismissible fade show">
             {error.detail || JSON.stringify(error)}
-            <button type="button" className="btn-close" onClick={() => setError(null)}></button>
+            <button
+              type="button"
+              className="btn-close"
+              onClick={() => setError(null)}
+            ></button>
           </div>
         )}
 
@@ -228,18 +239,18 @@ const VolunteerForm = () => {
           </div>
 
           <div className="form-group">
-              <label htmlFor="Address">Address</label>
-              <input
-                type="text"
-                id="address"
-                name="address"
-                className="form-control"
-                value={formData.address}
-                onChange={handleChange}
-                required
-                placeholder="Your Address"
-              />
-            </div>
+            <label htmlFor="Address">Address</label>
+            <input
+              type="text"
+              id="address"
+              name="address"
+              className="form-control"
+              value={formData.address}
+              onChange={handleChange}
+              required
+              placeholder="Your Address"
+            />
+          </div>
           <div className="form-group">
             <label htmlFor="phone">Phone Number</label>
             <div className="input-group">
@@ -259,7 +270,9 @@ const VolunteerForm = () => {
               />
             </div>
             {formData.phone.length > 0 && formData.phone.length !== 10 && (
-              <small className="text-danger">Phone number must be 10 digits</small>
+              <small className="text-danger">
+                Phone number must be 10 digits
+              </small>
             )}
           </div>
 
@@ -302,7 +315,9 @@ const VolunteerForm = () => {
                 onChange={handleFileChange}
                 accept="image/*"
               />
-              <small className="text-muted">Upload a clear headshot (JPEG/PNG)</small>
+              <small className="text-muted">
+                Upload a clear headshot (JPEG/PNG)
+              </small>
             </div>
 
             <div className="form-group">
@@ -315,7 +330,9 @@ const VolunteerForm = () => {
                 onChange={handleFileChange}
                 accept="image/*,application/pdf"
               />
-              <small className="text-muted">Upload citizenship or ID (Image/PDF)</small>
+              <small className="text-muted">
+                Upload citizenship or ID (Image/PDF)
+              </small>
             </div>
           </div>
 
@@ -341,14 +358,14 @@ const VolunteerForm = () => {
             </select>
           </div>
 
-          <button
-            type="submit"
-            className="submit-btn"
-            disabled={isSubmitting}
-          >
+          <button type="submit" className="submit-btn" disabled={isSubmitting}>
             {isSubmitting ? (
               <>
-                <span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                <span
+                  className="spinner-border spinner-border-sm"
+                  role="status"
+                  aria-hidden="true"
+                ></span>
                 <span className="ms-2">Registering...</span>
               </>
             ) : (
@@ -356,23 +373,23 @@ const VolunteerForm = () => {
             )}
           </button>
           <button
-  type="button"
-  className="btn btn-primary mb-4 rounded-pill"
-  onClick={() => navigate("/loginvol")}
-  style={{
-    width: '50%',
-    marginLeft: '160px',
-    padding: '10px 20px',
-    fontSize: '1rem',
-    fontWeight: '500',
-    transition: 'all 0.2s ease',
-    boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)',
-    border: 'none'
-  }}
->
-  <i className="bi bi-box-arrow-in-right me-2"></i>
-  Go to Login for ID Card
-</button>
+            type="button"
+            className="btn btn-primary mb-4 rounded-pill"
+            onClick={() => navigate("/loginvol")}
+            style={{
+              width: "30%",
+              marginLeft: "260px",
+              padding: "10px 20px",
+              fontSize: "1rem",
+              fontWeight: "500",
+              transition: "all 0.2s ease",
+              boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1)",
+              border: "none",
+            }}
+          >
+            <i className="bi bi-box-arrow-in-right me-2"></i>
+            Go to Login for ID Card
+          </button>
         </form>
       </div>
     </div>

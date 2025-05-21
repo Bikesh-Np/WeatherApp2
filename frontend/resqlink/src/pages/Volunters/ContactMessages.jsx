@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { FaEnvelope, FaUser, FaCalendarAlt, FaInfoCircle, FaSearch, FaMapMarkerAlt } from 'react-icons/fa';
+import { FaEnvelope, FaUser, FaCalendarAlt, FaInfoCircle, FaSearch, FaMapMarkerAlt, FaTimes } from 'react-icons/fa';
 import MapModal from './MapModal';
 import './Contactms.css';
 
@@ -11,6 +11,7 @@ const ContactMessages = () => {
     const [searchTerm, setSearchTerm] = useState('');
     const [showMap, setShowMap] = useState(false);
     const [selectedLocation, setSelectedLocation] = useState(null);
+    const [selectedMessage, setSelectedMessage] = useState(null);
 
     useEffect(() => {
         const fetchMessages = async () => {
@@ -43,29 +44,19 @@ const ContactMessages = () => {
         return new Date(dateString).toLocaleDateString(undefined, options);
     };
 
-    if (loading) {
-        return (
-            <div className="emerald-loading">
-                <div className="loading-spinner"></div>
-                <p>Loading messages...</p>
-            </div>
-        );
-    }
-
-    if (error) {
-        return (
-            <div className="emerald-error">
-                <FaInfoCircle className="error-icon" />
-                <p>{error}</p>
-            </div>
-        );
-    }
-
     const handleViewMap = (latitude, longitude) => {
         if (latitude && longitude) {
             setSelectedLocation({ latitude, longitude });
             setShowMap(true);
         }
+    };
+
+    const handleMessageClick = (message) => {
+        setSelectedMessage(message);
+    };
+
+    const closeMessageModal = () => {
+        setSelectedMessage(null);
     };
 
     if (loading) {
@@ -85,6 +76,7 @@ const ContactMessages = () => {
             </div>
         );
     }
+
     return (
         <div className="emerald-messages-container">
             <div className="emerald-messages-header">
@@ -103,7 +95,6 @@ const ContactMessages = () => {
                 </div>
             </div>
 
-            
             {filteredMessages.length === 0 ? (
                 <div className="emerald-no-messages">
                     <img src="/images/no-messages.svg" alt="No messages" />
@@ -137,17 +128,17 @@ const ContactMessages = () => {
                                         </a>
                                     </td>
                                     <td>{message.subject}</td>
-                                    <td className="message-content">
+                                    <td 
+                                        className="message-content"
+                                        onClick={() => handleMessageClick(message)}
+                                        style={{ cursor: 'pointer' }}
+                                    >
                                         <div className="message-preview">
                                             {message.message.length > 50 
                                                 ? `${message.message.substring(0, 50)}...` 
                                                 : message.message}
                                         </div>
-                                        {message.message.length > 50 && (
-                                            <div className="message-tooltip">{message.message}</div>
-                                        )}
                                     </td>
-                          
                                     <td>
                                         <div className="date-info">
                                             <FaCalendarAlt className="date-icon" />
@@ -173,6 +164,27 @@ const ContactMessages = () => {
                 </div>
             )}
 
+            {/* Message Popup Modal */}
+            {selectedMessage && (
+                <div className="message-modal">
+                    <div className="message-modal-content">
+                        <button className="close-modal" onClick={closeMessageModal}>
+                            <FaTimes />
+                        </button>
+                        <h3>{selectedMessage.subject}</h3>
+                        <div className="message-meta">
+                            <p><FaUser /> {selectedMessage.name}</p>
+                            <p><FaEnvelope /> {selectedMessage.email}</p>
+                            <p><FaCalendarAlt /> {formatDate(selectedMessage.created_at)}</p>
+                        </div>
+                        <div className="message-body">
+                            {selectedMessage.message}
+                        </div>
+                    </div>
+                </div>
+            )}
+
+            {/* Map Modal */}
             {showMap && selectedLocation && (
                 <MapModal 
                     latitude={selectedLocation.latitude}
@@ -180,7 +192,6 @@ const ContactMessages = () => {
                     onClose={() => setShowMap(false)}
                 />
             )}
-            
         </div>
     );
 };

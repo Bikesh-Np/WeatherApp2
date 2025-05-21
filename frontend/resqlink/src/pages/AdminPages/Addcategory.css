@@ -15,8 +15,9 @@
   
   /* Main Container */
   .category-creation-dashboard {
+    margin-top: 60px;
+    margin-left: 600px;
     max-width: 600px;
-    margin: 2rem auto;
     padding: 2rem;
     background: white;
     border-radius: var(--radius-medium);

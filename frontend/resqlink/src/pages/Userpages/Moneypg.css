@@ -1,0 +1,46 @@
+/* Donation specific styles */
+.donation-info-card {
+  background: #f8f9fa;
+  border-radius: 10px;
+  padding: 20px;
+  text-align: center;
+  border-left: 4px solid #28a745;
+}
+
+.donation-icon {
+  font-size: 2.5rem;
+  color: #28a745;
+  margin-bottom: 15px;
+}
+
+.donate-btn {
+  background: #28a745;
+  border: none;
+  padding: 12px;
+  font-size: 1.1rem;
+  font-weight: 500;
+}
+
+.donate-btn:hover {
+  background: #218838;
+}
+
+.quick-amounts {
+  display: flex;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.quick-amounts button {
+  flex: 1;
+}
+
+.security-info {
+  color: #6c757d;
+  font-size: 0.9rem;
+}
+
+.security-info i {
+  margin-right: 8px;
+  color: #28a745;
+}

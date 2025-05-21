@@ -112,10 +112,10 @@
   gap: 6px;
 }
 
-.map-container {
-  margin-top: -175px;
+.map-con {
+  margin-top: 5px;
   margin-left: -20px;
-  width: 620px;
+  width: 795px;
   padding: 22px;
 }
 
@@ -198,7 +198,7 @@
   transform: scale(1.3) rotate(0deg);
 }
 
-/* Animations */
+/*  Animations */
 @keyframes fadeIn {
   from { opacity: 0; transform: scale(0.95); }
   to { opacity: 1; transform: scale(1); }

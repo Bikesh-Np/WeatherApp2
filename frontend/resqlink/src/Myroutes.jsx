@@ -32,6 +32,7 @@ import DisasterDashboard from './services/DisasterDashboard'
 import WeatherCard from './services/WeatherCard'
 import Vologin from './pages/Volunters/Vologin'
 import Volid from './pages/Volunters/Volid'
+import Moneypg from './pages/Userpages/Moneypg'
 
 
 const Myroutes = () => {
@@ -57,7 +58,7 @@ const Myroutes = () => {
 
 
                 <Route path='resources' element={<ReliefProducts/>}/>
-               
+                 <Route path='moneydonatepg' element={<Moneypg/>}/>              
                 <Route path='donatepg' element={<Payment/>}/>
                 <Route path='adminregister' element={<AdminRegister/>}/>
                 <Route path='adminlogin' element={<AdminLogin/>}/>

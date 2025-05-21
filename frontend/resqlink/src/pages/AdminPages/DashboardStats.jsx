@@ -1,6 +1,15 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { Container, Row, Col, Card, Spinner, Alert, Button, Badge } from "react-bootstrap";
+import {
+  Container,
+  Row,
+  Col,
+  Card,
+  Spinner,
+  Alert,
+  Button,
+  Badge,
+} from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import "./DashboardStats.css";
 
@@ -25,36 +34,41 @@ const DashboardStats = () => {
 
   const handleSeeMore = (type) => {
     const routes = {
-      "user": "/admin/userverify",
-      "messages": "/admin/message",
-      "payments": "/admin/donations",
-      "products": "/admin/productlist",
-      "categories": "/admin/category"
+      user: "/admin/userverify",
+      Volunteer: "/admin/listvolunteer",
+      payments: "/admin/donations",
+      products: "/admin/productlist",
+      categories: "/admin/category",
     };
     navigate(routes[type]);
   };
 
   const formatCurrency = (amount) => {
-    return new Intl.NumberFormat('en-US', {
-      style: 'currency',
-      currency: 'USD',
-      minimumFractionDigits: 0
+    return new Intl.NumberFormat("en-US", {
+      style: "currency",
+      currency: "USD",
+      minimumFractionDigits: 0,
     }).format(amount);
   };
 
-  if (loading) return (
-    <div className="d-flex justify-content-center align-items-center" style={{ height: '80vh' }}>
-      <Spinner animation="border" variant="success" />
-    </div>
-  );
+  if (loading)
+    return (
+      <div
+        className="d-flex justify-content-center align-items-center"
+        style={{ height: "80vh" }}
+      >
+        <Spinner animation="border" variant="success" />
+      </div>
+    );
 
-  if (error) return (
-    <Container className="mt-5">
-      <Alert variant="danger" className="text-center">
-        {error}
-      </Alert>
-    </Container>
-  );
+  if (error)
+    return (
+      <Container className="mt-5">
+        <Alert variant="danger" className="text-center">
+          {error}
+        </Alert>
+      </Container>
+    );
 
   return (
     <Container fluid className="dashboard-container px-4">
@@ -65,7 +79,12 @@ const DashboardStats = () => {
         </h1>
         <div className="dashboard-date-badge bg-success-light text-success">
           <i className="fas fa-calendar-alt me-2"></i>
-          {new Date().toLocaleDateString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })}
+          {new Date().toLocaleDateString("en-US", {
+            weekday: "long",
+            year: "numeric",
+            month: "long",
+            day: "numeric",
+          })}
         </div>
       </div>
 
@@ -78,16 +97,18 @@ const DashboardStats = () => {
               <div className="d-flex justify-content-between align-items-center">
                 <div>
                   <h6 className="stat-category text-muted">REGISTERED USERS</h6>
-                  <h2 className="stat-value text-dark">{stats?.user_count || 0}</h2>
-                  <div className="stat-trend text-success">
+                  <div className="stat-circle">
+                    <h2 className="stat-value">{stats?.user_count || 0}</h2>
                   </div>
+
+                  <div className="stat-trend text-success"></div>
                 </div>
                 <div className="stat-icon-circle bg-success-light">
-                  <i className="fas fa-users text-success"></i>
+                  <i className="fas fa-user text-success"></i>
                 </div>
               </div>
-              <Button 
-                variant="outline-success" 
+              <Button
+                variant="outline-success"
                 className="w-100 mt-5 stat-action-btt"
                 onClick={() => handleSeeMore("user")}
               >
@@ -103,21 +124,28 @@ const DashboardStats = () => {
             <Card.Body className="p-4">
               <div className="d-flex justify-content-between align-items-center">
                 <div>
-                  <h6 className="stat-category text-muted">CONTACT MESSAGES</h6>
-                  <h2 className="stat-value text-dark">{stats?.message_count || 0}</h2>
-                  <div className="stat-trend text-success">
+                  <h6 className="stat-category text-muted">
+                    REGISTERED VOLUNTEER
+                  </h6>
+                  <div className="stat-circle">
+                    <h2 className="stat-value">
+                      {stats?.volunteer_count || 0}
+                    </h2>
                   </div>
+
+                  <div className="stat-trend text-success"></div>
                 </div>
                 <div className="stat-icon-circle bg-success-light">
-                  <i className="fas fa-envelope-open-text text-success"></i>
+                  <i className="fas fa-users text-success"></i>
                 </div>
               </div>
-              <Button 
-                variant="outline-success" 
+              <Button
+                variant="outline-success"
                 className="w-100 mt-5 stat-action-btt"
-                onClick={() => handleSeeMore("messages")}
+                onClick={() => handleSeeMore("Volunteer")}
               >
-                View Messages <i className="fas fa-external-link-alt ms-2"></i>
+                Manage Volunteer{" "}
+                <i className="fas fa-external-link-alt ms-2"></i>
               </Button>
             </Card.Body>
           </Card>
@@ -130,7 +158,10 @@ const DashboardStats = () => {
               <div className="d-flex justify-content-between align-items-center">
                 <div>
                   <h6 className="stat-category text-muted">TOTAL PAYMENTS</h6>
-                  <h2 className="stat-value text-dark">{stats?.payment_count || 0}</h2>
+                  <div className="stat-circle">
+                    <h2 className="stat-value">{stats?.payment_count || 0}</h2>
+                  </div>
+
                   <div className="stat-amount text-success">
                     {formatCurrency(stats?.total_payments || 0)}
                   </div>
@@ -139,8 +170,8 @@ const DashboardStats = () => {
                   <i className="fas fa-credit-card text-success"></i>
                 </div>
               </div>
-              <Button 
-                variant="outline-success" 
+              <Button
+                variant="outline-success"
                 className="w-100 mt-4 stat-action-btt"
                 onClick={() => handleSeeMore("payments")}
               >
@@ -160,7 +191,9 @@ const DashboardStats = () => {
                 <i className="fas fa-boxes text-success me-3"></i>
                 Inventory Management
               </h2>
-              <p className="text-muted mb-0">Overview of your product inventory</p>
+              <p className="text-muted mb-0">
+                Overview of your product inventory
+              </p>
             </div>
             <Badge pill bg="success" className="px-3 py-2 fs-6">
               <i className="fas fa-cubes me-2"></i>
@@ -183,17 +216,19 @@ const DashboardStats = () => {
                     </div>
                   </div>
                   <div className="text-center py-4">
-                    <h1 className="display-4 text-dark">{stats?.product_count || 0}</h1>
+                    <h1 className="display-4 text-dark">
+                      {stats?.product_count || 0}
+                    </h1>
                     <div className="d-flex justify-content-center gap-2">
-                    <Button 
-                        variant="outline-success" 
+                      <Button
+                        variant="outline-success"
                         onClick={() => handleSeeMore("products")}
                       >
                         View Products
                       </Button>
-                      <Button 
-                        variant="success" 
-                        onClick={() => navigate('/admin/addproduct')}
+                      <Button
+                        variant="success"
+                        onClick={() => navigate("/admin/addproduct")}
                       >
                         <i className="fas fa-plus me-2"></i> Add New
                       </Button>
@@ -217,17 +252,19 @@ const DashboardStats = () => {
                     </div>
                   </div>
                   <div className="text-center py-4">
-                    <h1 className="display-4 text-dark">{stats?.category_count || 0}</h1>
+                    <h1 className="display-4 text-dark">
+                      {stats?.category_count || 0}
+                    </h1>
                     <div className="d-flex justify-content-center gap-2">
-                      <Button 
-                        variant="outline-success" 
+                      <Button
+                        variant="outline-success"
                         onClick={() => handleSeeMore("categories")}
                       >
                         View Categories
                       </Button>
-                      <Button 
-                        variant="success" 
-                        onClick={() => navigate('/admin/addcategory')}
+                      <Button
+                        variant="success"
+                        onClick={() => navigate("/admin/addcategory")}
                       >
                         <i className="fas fa-plus me-2"></i> Add New
                       </Button>

@@ -80,7 +80,7 @@ const Footer = () => {
               <li><a href="/service">Disaster Updates</a></li>
               <li><a href="/registervolunteer">Volunteer</a></li>
               <li><a href="/resources">Resources</a></li>
-              <li><a href="/contactus">About Us</a></li>
+              <li><a href="/contactus">Contact Us</a></li>
             </ul>
           </motion.div>
 

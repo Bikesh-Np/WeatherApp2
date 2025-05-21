@@ -312,3 +312,78 @@
     width: 120px;
     text-align: center;
 }
+.emerald-no-messages {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 40px 0;
+    color: #7f8c8d;
+}
+
+.emerald-no-messages img {
+    width: 150px;
+    margin-bottom: 20px;
+}
+
+/* Message Modal Styles */
+.message-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.7);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.message-modal-content {
+    background-color: white;
+    padding: 2rem;
+    border-radius: 8px;
+    max-width: 600px;
+    width: 90%;
+    max-height: 80vh;
+    overflow-y: auto;
+    position: relative;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+.close-modal {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: none;
+    border: none;
+    font-size: 1.2rem;
+    cursor: pointer;
+    color: #666;
+    padding: 5px;
+}
+
+.close-modal:hover {
+    color: #333;
+}
+
+.message-meta {
+    margin-bottom: 1rem;
+    color: #555;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 1rem;
+}
+
+.message-meta p {
+    margin: 0.5rem 0;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.message-body {
+    white-space: pre-wrap;
+    line-height: 1.6;
+    padding: 0.5rem 0;
+}

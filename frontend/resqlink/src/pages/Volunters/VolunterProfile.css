@@ -9,7 +9,6 @@
   min-height: 100vh;
 }
 
-/* Header Styles */
 .dashboard-header-wrapper {
   display: flex;
   justify-content: space-between;

@@ -31,7 +31,7 @@ const MapModal = ({ latitude, longitude, accuracy, onClose }) => {
             <p><span className="detail-label">Accuracy:</span> <span className="detail-value"><FaCrosshairs /> ±{accuracyRadius.toFixed(0)} meters</span></p>
           </div>
         </div>
-        <div className="map-container">
+        <div className="map-con">
           <MapContainer 
             center={position} 
             zoom={15} 

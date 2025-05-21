@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import image1 from "../../img/1.png";
 import image2 from "../../img/2.jpeg";
 import image3 from "../../img/3.png";
-import { FaDonate, FaSearch, FaChevronLeft, FaChevronRight, FaTimes } from "react-icons/fa";
+import { FaDonate,FaHandsHelping, FaUsers, FaHome, FaSearch, FaChevronLeft, FaChevronRight, FaTimes, FaHeart, FaShieldAlt } from "react-icons/fa";
 import "./Homepage.css";
 import axios from "axios";
 
@@ -15,6 +15,7 @@ const Homepage = () => {
   const [categories, setCategories] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState('');
   const [priceRange, setPriceRange] = useState([0, 10000]);
+  const [donationAmount, setDonationAmount] = useState('');
   const navigate = useNavigate();
 
   const carouselItems = [
@@ -71,7 +72,17 @@ const Homepage = () => {
     }, 1500);
   };
 
-
+  const handleMoneyDonation = () => {
+    if (donationAmount && donationAmount > 0) {
+      setLoading(true);
+      setTimeout(() => {
+        setLoading(false);
+        navigate("/moneydonatepg", { state: { amount: donationAmount } });
+      }, 1500);
+    } else {
+      alert('Please enter a valid donation amount');
+    }
+  };
 
   const nextSlide = () => {
     setActiveIndex((prev) => (prev === carouselItems.length - 1 ? 0 : prev + 1));
@@ -153,6 +164,8 @@ const Homepage = () => {
         </div>
       </section>
 
+
+
       <section className="premium-products-section">
         <div className="premium-section-header">
           <div className="header-text">
@@ -219,7 +232,7 @@ const Homepage = () => {
             </div>
           </div>
 
-          <button className="filter-reset-btn" onClick={resetAllFilters}>
+          <button className="filter-res-btn" onClick={resetAllFilters}>
             Reset All
           </button>
         </div>
@@ -265,6 +278,89 @@ const Homepage = () => {
           </div>
         )}
       </section>
+            {/* Money Donation Section */}
+      <section className="premium-products-section">
+        <div className="premium-section-header">
+          <div className="header-text">
+            <span className="section-subtitle">Direct Support</span>
+            <h2 className="section-title">
+              <FaHeart className="title-icon" />
+              Make a Donation
+            </h2>
+          </div>
+        </div>
+  
+  <div className="relief-container">
+    <div className="relief-image-wrapper">
+      <img 
+        src="https://images.unsplash.com/photo-1582213782179-e0d53f98f2ca?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" 
+        alt="Disaster victims receiving aid" 
+        className="relief-image"
+      />
+      <div className="image-overlay">
+        <h3>Your Help Matters</h3>
+        <p>Join us in supporting disaster victims</p>
+      </div>
+    </div>
+    
+    <div className="donation-card">
+      <div className="card-header">
+        <div className="icon-circle">
+          <FaHandsHelping className="help-icon" />
+        </div>
+        <h2>Emergency Relief Fund</h2>
+        <p className="subtitle">Provide immediate assistance to affected families</p>
+      </div>
+      
+      <div className="donation-form">
+        <div className="form-group">
+          <label>Your Donation Amount</label>
+          <div className="input-container">
+            <span className="currency">Rs.</span>
+            <input
+              type="number"
+              placeholder="0.00"
+              min="1"
+              value={donationAmount}
+              onChange={(e) => setDonationAmount(e.target.value)}
+            />
+          </div>
+        </div>
+        
+        <div className="quick-donations">
+          <p>Quick Donation:</p>
+          <div className="amount-buttons">
+            <button onClick={() => setDonationAmount(500)}>500</button>
+            <button onClick={() => setDonationAmount(1000)}>1,000</button>
+            <button onClick={() => setDonationAmount(2000)}>2,000</button>
+            <button onClick={() => setDonationAmount(5000)}>5,000</button>
+          </div>
+        </div>
+        
+        <div className="impact-stats">
+          <div className="stat-item">
+            <FaUsers className="stat-icon" />
+            <span>1,000+ families helped</span>
+          </div>
+          <div className="stat-item">
+            <FaHome className="stat-icon" />
+            <span>200+ shelters built</span>
+          </div>
+        </div>
+      </div>
+      
+      <button className="donate-button" onClick={handleMoneyDonation}>
+        <FaDonate className="button-icon" />
+        Donate Now
+      </button>
+      
+      <div className="security-badge">
+        <FaShieldAlt className="shield-icon" />
+        <span>100% Secure Donation</span>
+      </div>
+    </div>
+  </div>
+</section>
     </div>
   );
 };

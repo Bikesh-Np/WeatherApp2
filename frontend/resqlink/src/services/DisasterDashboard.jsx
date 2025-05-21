@@ -104,9 +104,9 @@ const DisasterDashboard = () => {
   };
 
   if (disasters.loading) return (
-    <div className="premium-loading-screen">
-      <div className="premium-spinner">
-        <div className="premium-spinner-inner"></div>
+    <div className="pulse-loading-screen">
+      <div className="pulse-spinner">
+        <div className="pulse-spinner-inner"></div>
       </div>
       <h2>Loading Disaster Data</h2>
       <p>Gathering real-time information for Asia</p>
@@ -114,13 +114,13 @@ const DisasterDashboard = () => {
   );
 
   if (disasters.error) return (
-    <div className="premium-error-screen">
-      <div className="premium-error-content">
-        <div className="premium-error-icon">⚠️</div>
+    <div className="pulse-error-screen">
+      <div className="pulse-error-content">
+        <div className="pulse-error-icon">⚠️</div>
         <h2>Connection Error</h2>
         <p>{disasters.error}</p>
         <button 
-          className="premium-retry-btn"
+          className="pulse-retry-btn"
           onClick={() => window.location.reload()}
         >
           <span>Retry Connection</span>
@@ -135,22 +135,22 @@ const DisasterDashboard = () => {
   const activeData = activeTab === 'earthquakes' ? disasters.earthquakes : disasters.wildfires;
 
   return (
-    <div className="premium-dashboard">
+    <div className="pulse-container">
       {/* Sidebar */}
-      <div className={`premium-sidebar ${sidebarCollapsed ? 'collapsed' : ''}`}>
-        <div className="premium-sidebar-header">
-          <div className="premium-logo">
+      <div className={`pulse-sidebar ${sidebarCollapsed ? 'collapsed' : ''}`}>
+        <div className="pulse-sidebar-header">
+          <div className="pulse-logo">
             <svg viewBox="0 0 24 24">
               <path d="M12,2L4,12L12,22L20,12L12,2M12,4L18,12L12,20L6,12L12,4M11,16V8H15V16H11Z" />
             </svg>
             {!sidebarCollapsed && <span>ResQLink Asia</span>}
           </div>
-          {!sidebarCollapsed && <div className="premium-logo-subtitle">Disaster Intelligence Platform</div>}
+          {!sidebarCollapsed && <div className="pulse-logo-subtitle">Disaster Monitoring System</div>}
         </div>
 
-        <div className="premium-nav">
+        <div className="pulse-nav">
           <button 
-            className={`premium-nav-btn ${activeTab === 'earthquakes' ? 'active' : ''}`}
+            className={`pulse-nav-btn ${activeTab === 'earthquakes' ? 'active' : ''}`}
             onClick={() => setActiveTab('earthquakes')}
           >
             <svg viewBox="0 0 24 24">
@@ -159,13 +159,13 @@ const DisasterDashboard = () => {
             {!sidebarCollapsed && (
               <>
                 <span>Earthquakes</span>
-                <div className="premium-nav-badge">{disasters.earthquakes.length}</div>
+                <div className="pulse-nav-badge">{disasters.earthquakes.length}</div>
               </>
             )}
           </button>
 
           <button 
-            className={`premium-nav-btn ${activeTab === 'wildfires' ? 'active' : ''}`}
+            className={`pulse-nav-btn ${activeTab === 'wildfires' ? 'active' : ''}`}
             onClick={() => setActiveTab('wildfires')}
           >
             <svg viewBox="0 0 24 24">
@@ -174,13 +174,13 @@ const DisasterDashboard = () => {
             {!sidebarCollapsed && (
               <>
                 <span>Wildfires</span>
-                <div className="premium-nav-badge">{disasters.wildfires.length}</div>
+                <div className="pulse-nav-badge">{disasters.wildfires.length}</div>
               </>
             )}
           </button>
           
           <button 
-            className="premium-nav-btn"
+            className="pulse-nav-btn"
             onClick={() => window.location.href = 'http://localhost:3000/weather'}
           >
             <svg viewBox="0 0 64 64" width="24" height="24">
@@ -191,18 +191,18 @@ const DisasterDashboard = () => {
           </button>
         </div>
 
-        <div className="premium-sidebar-footer">
+        <div className="pulse-sidebar-footer">
           {!sidebarCollapsed && (
             <>
-              <div className="premium-update-time">
+              <div className="pulse-update-time">
                 Last updated: {disasters.lastUpdated?.toLocaleTimeString()}
               </div>
-              <div className="premium-version">v1.2.0</div>
+              <div className="pulse-version">v2.0.1</div>
             </>
           )}
         </div>
         
-        <button className="sidebar-toggle" onClick={toggleSidebar}>
+        <button className="pulse-sidebar-toggle" onClick={toggleSidebar}>
           <svg viewBox="0 0 24 24">
             {sidebarCollapsed ? (
               <path d="M9,19V13H11V17H13V13H15V19H17V12A1,1 0 0,0 16,11H8A1,1 0 0,0 7,12V19H9M12,2A3,3 0 0,1 15,5V11H9V5A3,3 0 0,1 12,2Z" />
@@ -214,29 +214,29 @@ const DisasterDashboard = () => {
       </div>
 
       {/* Main Content */}
-      <div className="premium-main-content">
+      <div className="pulse-main-content">
         {/* Stats Bar */}
-        <div className="premium-stats-bar">
-          <div className="premium-stat-card">
-            <div className="premium-stat-value">{disasters.earthquakes.length}</div>
-            <div className="premium-stat-label">Earthquakes</div>
+        <div className="pulse-stats-bar">
+          <div className="pulse-stat-card">
+            <div className="pulse-stat-value">{disasters.earthquakes.length}</div>
+            <div className="pulse-stat-label">Earthquakes</div>
           </div>
-          <div className="premium-stat-card">
-            <div className="premium-stat-value">{disasters.wildfires.length}</div>
-            <div className="premium-stat-label">Wildfires</div>
+          <div className="pulse-stat-card">
+            <div className="pulse-stat-value">{disasters.wildfires.length}</div>
+            <div className="pulse-stat-label">Wildfires</div>
           </div>
-          <div className="premium-stat-card">
-            <div className="premium-stat-value">
+          <div className="pulse-stat-card">
+            <div className="pulse-stat-value">
               {new Date().toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric' })}
             </div>
-            <div className="premium-stat-label">
+            <div className="pulse-stat-label">
               {new Date().toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' })}
             </div>
           </div>
         </div>
 
         {/* Map Container */}
-        <div className="premium-map-container">
+        <div className="pulse-map-container">
           <MapContainer 
             center={[35, 105]} 
             zoom={4} 
@@ -259,18 +259,18 @@ const DisasterDashboard = () => {
                 position={[quake.location[1], quake.location[0]]}
                 icon={earthquakeIcon}
               >
-                <Popup className="premium-popup">
-                  <div className="premium-popup-header">
+                <Popup className="pulse-popup">
+                  <div className="pulse-popup-header">
                     <h3>Earthquake Alert</h3>
-                    <div className="premium-popup-magnitude">
+                    <div className="pulse-popup-magnitude">
                       M{quake.magnitude}
                     </div>
                   </div>
-                  <div className="premium-popup-content">
+                  <div className="pulse-popup-content">
                     <p><strong>Location:</strong> {quake.place}</p>
                     <p><strong>Time:</strong> {new Date(quake.time).toLocaleString()}</p>
                     {quake.tsunami === 1 && (
-                      <p className="tsunami-warning">⚠️ Tsunami Warning Issued</p>
+                      <p className="pulse-tsunami-warning">⚠️ Tsunami Warning Issued</p>
                     )}
                   </div>
                 </Popup>
@@ -284,14 +284,14 @@ const DisasterDashboard = () => {
                 position={[fire.location[1], fire.location[0]]}
                 icon={wildfireIcon}
               >
-                <Popup className="premium-popup">
-                  <div className="premium-popup-header">
+                <Popup className="pulse-popup">
+                  <div className="pulse-popup-header">
                     <h3>Wildfire Alert</h3>
-                    <div className={`premium-popup-severity ${fire.severity.toLowerCase()}`}>
+                    <div className={`pulse-popup-severity ${fire.severity.toLowerCase()}`}>
                       {fire.severity}
                     </div>
                   </div>
-                  <div className="premium-popup-content">
+                  <div className="pulse-popup-content">
                     <p><strong>Area:</strong> {fire.area}</p>
                     <p><strong>Reported:</strong> {new Date(fire.time).toLocaleString()}</p>
                   </div>
@@ -302,17 +302,17 @@ const DisasterDashboard = () => {
         </div>
 
         {/* Events List */}
-        <div className="premium-events-list">
-          <div className="premium-events-header">
+        <div className="pulse-events-list">
+          <div className="pulse-events-header">
             <h2>{activeTab === 'earthquakes' ? 'Recent Earthquakes' : 'Active Wildfires'}</h2>
-            <div className="premium-events-count">{activeData.length} events</div>
+            <div className="pulse-events-count">{activeData.length} events</div>
           </div>
           
-          <div className="premium-events-scroll">
+          <div className="pulse-events-scroll">
             {activeData.length > 0 ? (
               activeData.map(event => (
-                <div key={event.id} className="premium-event-card">
-                  <div className="premium-event-icon">
+                <div key={event.id} className="pulse-event-card">
+                  <div className="pulse-event-icon">
                     {activeTab === 'earthquakes' ? (
                       <svg viewBox="0 0 24 24">
                         <path d="M12,2C13.1,2 14,2.9 14,4C14,5.1 13.1,6 12,6C10.9,6 10,5.1 10,4C10,2.9 10.9,2 12,2M15.5,8H16.5A1.5,1.5 0 0,1 18,9.5V10.9C18,12.2 17.24,13.43 16,14V17H15V19H14V17H10V19H9V17H8V14C6.76,13.43 6,12.2 6,10.9V9.5A1.5,1.5 0 0,1 7.5,8H8.5C8.5,7.4 8.9,7 9.5,7H14.5C15.1,7 15.5,7.4 15.5,8M12,11A1,1 0 0,0 11,12A1,1 0 0,0 12,13A1,1 0 0,0 13,12A1,1 0 0,0 12,11Z" />
@@ -323,24 +323,24 @@ const DisasterDashboard = () => {
                       </svg>
                     )}
                   </div>
-                  <div className="premium-event-content">
-                    <div className="premium-event-header">
+                  <div className="pulse-event-content">
+                    <div className="pulse-event-header">
                       <h3>
                         {activeTab === 'earthquakes' 
                           ? `M${event.magnitude} Earthquake` 
                           : `${event.severity} Wildfire`}
                         {activeTab === 'earthquakes' && event.tsunami === 1 && (
-                          <span className="tsunami-indicator">🌊 Tsunami</span>
+                          <span className="pulse-tsunami-indicator">🌊 Tsunami</span>
                         )}
                       </h3>
-                      <div className="premium-event-time">
+                      <div className="pulse-event-time">
                         {new Date(event.time).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
                       </div>
                     </div>
-                    <p className="premium-event-location">
+                    <p className="pulse-event-location">
                       {activeTab === 'earthquakes' ? event.place : event.area}
                     </p>
-                    <div className="premium-event-meta">
+                    <div className="pulse-event-meta">
                       {activeTab === 'earthquakes' ? (
                         <span>Depth: {event.location[2]?.toFixed(1) || 'Unknown'} km</span>
                       ) : (
@@ -348,7 +348,7 @@ const DisasterDashboard = () => {
                       )}
                     </div>
                   </div>
-                  <button className="premium-event-more">
+                  <button className="pulse-event-more">
                     <svg viewBox="0 0 24 24">
                       <path d="M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z" />
                     </svg>
@@ -356,7 +356,7 @@ const DisasterDashboard = () => {
                 </div>
               ))
             ) : (
-              <div className="premium-no-events">
+              <div className="pulse-no-events">
                 <svg viewBox="0 0 24 24">
                   <path d="M12,2A10,10 0 0,1 22,12A10,10 0 0,1 12,22A10,10 0 0,1 2,12A10,10 0 0,1 12,2M12,4A8,8 0 0,0 4,12A8,8 0 0,0 12,20A8,8 0 0,0 20,12A8,8 0 0,0 12,4M11,16.5L6.5,12L7.91,10.59L11,13.67L16.59,8.09L18,9.5L11,16.5Z" />
                 </svg>
