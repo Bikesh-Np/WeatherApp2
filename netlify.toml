@@ -24,7 +24,7 @@
     X-Frame-Options = "DENY"
     X-XSS-Protection = "1; mode=block"
     Content-Security-Policy = "default-src 'self' https://weatherapp2-1-v07l.onrender.com; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' https://weatherapp2-1-v07l.onrender.com data:;"
-    Access-Control-Allow-Origin = "https://your-netlify-site.netlify.app"
+    Access-Control-Allow-Origin = "https://resqlinkfront.netlify.app"
     Access-Control-Allow-Methods = "GET, POST, PUT, DELETE, OPTIONS"
     Access-Control-Allow-Headers = "Content-Type, Authorization"
 
@@ -36,5 +36,5 @@
 [[headers]]
   for = "/csrf/*"
   [headers.values]
-    Access-Control-Allow-Origin = "https://your-netlify-site.netlify.app"
+    Access-Control-Allow-Origin = "https://resqlinkfront.netlify.app"
     Access-Control-Allow-Credentials = "true"

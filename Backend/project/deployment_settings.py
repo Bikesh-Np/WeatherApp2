@@ -22,8 +22,10 @@ MIDDLEWARE = [
 ]
 
 CORS_ALLOWED_ORIGINS = [
-    'https://render-deploy-tutorial-reactjs-code.onrender.com'
+    "https://resqlinkfront.netlify.app",
+    "http://localhost:3000",
 ]
+
 
 STORAGES = {
     "default":{

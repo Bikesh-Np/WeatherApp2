@@ -106,7 +106,11 @@ MEDIA_ROOT = BASE_DIR / 'media'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # CORS settings
-CORS_ALLOWED_ORIGINS = config('CORS_ALLOWED_ORIGINS', default='http://localhost:3000', cast=Csv())
+CORS_ALLOWED_ORIGINS = [
+    "https://resqlinkfront.netlify.app",
+    "http://localhost:3000",
+]
+
 
 # JWT configurations
 SIMPLE_JWT = {
