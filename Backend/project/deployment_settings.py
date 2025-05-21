@@ -1,40 +1,14 @@
-import os
-from .settings import *  # Import base settings
+import os 
+import dj_database_url
+from .settings import * 
+from .settings import BASE_DIR
 
-# Override for production
+ALLOWED_HOSTS = [os.environ.get('RENDER_EXTERNAL_HOSTNAME')]
+CSRF_TRUSTED_ORIGINS = ['https://'+os.environ.get('RENDER_EXTERNAL_HOSTNAME')]
 
 DEBUG = False
+SECRET_KEY = os.environ.get('SECRET_KEY')
 
-# Use Render's external hostname as ALLOWED_HOSTS and CSRF_TRUSTED_ORIGINS
-render_hostname = os.environ.get('RENDER_EXTERNAL_HOSTNAME')
-if render_hostname:
-    ALLOWED_HOSTS = [render_hostname]
-    CSRF_TRUSTED_ORIGINS = [f'https://{render_hostname}']
-
-# CORS origins for deployed frontend URL
-CORS_ALLOWED_ORIGINS = [
-    'https://resqlink-frontend.onrender.com',
-]
-
-# Whitenoise static files storage for production
-STORAGES = {
-    "default": {
-        "BACKEND": "django.core.files.storage.FileSystemStorage",
-    },
-    "staticfiles": {
-        "BACKEND": "whitenoise.storage.CompressedStaticFilesStorage",
-    },
-}
-
-# Database (already handled by dj_database_url in base, but you can reinforce here)
-DATABASES = {
-    'default': dj_database_url.config(
-        default=os.environ.get('DATABASE_URL'),
-        conn_max_age=600,
-    )
-}
-
-# Middleware: add whitenoise in the right order
 MIDDLEWARE = [
     "corsheaders.middleware.CorsMiddleware",
     'django.middleware.security.SecurityMiddleware',
@@ -47,7 +21,53 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-# Secret key from environment variable
-SECRET_KEY = os.environ.get('SECRET_KEY')
+CORS_ALLOWED_ORIGINS = [
+    'https://resqlink-frontend.onrender.com'
+]
 
-# Email & Twilio credentials should already come from env via base settings
+STORAGES = {
+    "default":{
+        "BACKEND" : "django.core.files.storage.FileSystemStorage",
+    },
+    "staticfiles": {
+        "BACKEND" : "whitenoise.storage.CompressedStaticFilesStorage",
+    },
+
+}
+
+DATABASES = {
+    'default': dj_database_url.config(
+        default= os.environ['DATABASE_URL'], 
+        conn_max_age=600
+    )
+}
+
+
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'handlers': {
+        'mail_admins': {
+            'level': 'ERROR',
+            'class': 'django.utils.log.AdminEmailHandler',
+        },
+    },
+    'loggers': {
+        'django': {
+            'handlers': ['mail_admins'],
+            'level': 'ERROR',
+            'propagate': True,
+        },
+    },
+}
+
+
+
+ADMINS = [("CBI Analytics", "YOUREMAIL@EMAIL.com")]
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com' 
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = 'resqlinkmanagement@gmail.com'  
+EMAIL_HOST_PASSWORD = 'pvzq wqrr gezj bnpz' 
