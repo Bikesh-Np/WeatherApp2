@@ -9,9 +9,9 @@ DEBUG = False
 SECRET_KEY = '0&%f#*)%vy+5_a@u(*e)#faq!q(*34@cq)4((eno)pz*g4gzjv'
 
 # Host settings
-RENDER_EXTERNAL_HOSTNAME = 'resqlink-backend.onrender.com'
+RENDER_EXTERNAL_HOSTNAME = 'RENDER_EXTERNAL_HOSTNAME'
 if RENDER_EXTERNAL_HOSTNAME:
-    ALLOWED_HOSTS = [RENDER_EXTERNAL_HOSTNAME, 'resqlink-backend.onrender.com']
+    ALLOWED_HOSTS = [RENDER_EXTERNAL_HOSTNAME, 'RENDER_EXTERNAL_HOSTNAME']
     CSRF_TRUSTED_ORIGINS = [f'https://{RENDER_EXTERNAL_HOSTNAME}']
 else:
     ALLOWED_HOSTS = []
