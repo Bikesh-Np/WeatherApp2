@@ -3,17 +3,24 @@ from datetime import timedelta
 from decouple import config, Csv
 import os
 
+
+from pathlib import Path
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-# Specify the path for the .env file
-env_path = BASE_DIR / '.env'
 
 # Quick-start development settings - unsuitable for production
-SECRET_KEY = config('SECRET_KEY')
-DEBUG = config('DEBUG', default=False, cast=bool)
-ALLOWED_HOSTS = config('ALLOWED_HOSTS', default='localhost,127.0.0.1', cast=Csv())
-# Installed apps
+# See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
+
+# SECURITY WARNING: keep the secret key used in production secret!
+SECRET_KEY = 'django-insecure-$3v*o%=2@omq(8g22o+9eejd=(rz3@-8$_hhzp%gu&(se6+ww1'
+
+# SECURITY WARNING: don't run with debug turned on in production!
+DEBUG = True
+
+ALLOWED_HOSTS = []
+
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -72,6 +79,10 @@ TEMPLATES = [
 # WSGI application
 WSGI_APPLICATION = 'project.wsgi.application'
 
+CORS_ALLOWED_ORIGINS = [
+    'http://localhost:5173'
+]
+
 # Database configuration
 DATABASES = {
     'default': {
@@ -106,9 +117,6 @@ MEDIA_ROOT = BASE_DIR / 'media'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-# CORS settings
-CORS_ALLOWED_ORIGINS = config('CORS_ALLOWED_ORIGINS', default='https://resqlink-frontend.onrender.com/', cast=Csv())
-
 
 
 # JWT configuration
@@ -131,3 +139,4 @@ EMAIL_HOST_PASSWORD = 'pvzq wqrr gezj bnpz'
 TWILIO_ACCOUNT_SID = 'AC6986e80fa1aeec95771a94ad827285f0'
 TWILIO_AUTH_TOKEN = '9213e6907c52c3e55c6d6bc388c9f98b'
 TWILIO_PHONE_NUMBER = '+12402908287'
+
