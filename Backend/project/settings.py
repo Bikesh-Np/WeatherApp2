@@ -73,16 +73,15 @@ TEMPLATES = [
 WSGI_APPLICATION = 'project.wsgi.application'
 
 # Database configuration
+import dj_database_url
+
 DATABASES = {
-    'default': {
-        "ENGINE": "django.db.backends.postgresql",
-        "NAME": "resqlinksys",
-        "USER": "bikesh",
-        "PASSWORD": "bikesh",
-        "HOST": "127.0.0.1",
-        "PORT": "5432",
-    }
+    'default': dj_database_url.config(
+        default=os.environ['DATABASE_URL'],
+        conn_max_age=600
+    )
 }
+
 
 # Password validation
 AUTH_PASSWORD_VALIDATORS = [
