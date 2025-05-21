@@ -23,6 +23,7 @@ MIDDLEWARE = [
 
 CORS_ALLOWED_ORIGINS = [
     "https://resqlinkfront.netlify.app",
+    "https://resqlink-frontend.onrender.com",
     "http://localhost:3000",
 ]
 
