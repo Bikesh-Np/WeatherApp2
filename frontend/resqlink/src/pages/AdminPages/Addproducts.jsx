@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { FiPlusCircle, FiImage, FiDollarSign, FiTag, FiAlignLeft } from 'react-icons/fi';
 import './Addproducts.css';
+import AxiosInstance from '../../components/AxiosInstance';
 
 const Addproducts = () => {
     const [productCategories, setProductCategories] = useState([]);
@@ -18,7 +19,7 @@ const Addproducts = () => {
     useEffect(() => {
         const fetchProductCategories = async () => {
             try {
-                const response = await axios.get('http://127.0.0.1:8000/api/category/');
+                const response = await AxiosInstance.get('/api/category/');
                 if (Array.isArray(response.data)) {
                     setProductCategories(response.data);
                 } else {
@@ -66,7 +67,7 @@ const Addproducts = () => {
         formPayload.append('product_description', newProduct.product_description);
 
         try {
-            await axios.post('http://127.0.0.1:8000/api/createproduct/', formPayload, {
+            await AxiosInstance.post('/api/createproduct/', formPayload, {
                 headers: { 'Content-Type': 'multipart/form-data' }
             });
             

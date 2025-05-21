@@ -4,6 +4,7 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { FiEdit, FiTrash2, FiSave, FiX, FiImage, FiPackage } from "react-icons/fi";
 import "./productlist.css";
+import AxiosInstance from "../../components/AxiosInstance";
 
 const Productlist = () => {
   const [productData, setProductData] = useState([]);
@@ -20,7 +21,7 @@ const Productlist = () => {
   useEffect(() => {
     const fetchProductData = async () => {
       try {
-        const response = await axios.get("/api/products");
+        const response = await AxiosInstance.get("/api/products");
         setProductData(response.data);
       } catch (error) {
         toast.error("Failed to load products");
@@ -35,7 +36,7 @@ const Productlist = () => {
     const confirmDelete = window.confirm("Confirm product deletion?");
     if (confirmDelete) {
       try {
-        await axios.delete(`http://127.0.0.1:8000/updatepro/${id}/`);
+        await AxiosInstance.delete(`/updatepro/${id}/`);
         setProductData(productData.filter((item) => item.id !== id));
         toast.success("Product removed successfully");
       } catch (error) {
@@ -66,7 +67,7 @@ const Productlist = () => {
         formPayload.append("image", productForm.image);
       }
 
-      await axios.put(`http://127.0.0.1:8000/updatepro/${id}/`, formPayload, {
+      await AxiosInstance.put(`/updatepro/${id}/`, formPayload, {
         headers: {
           "Content-Type": "multipart/form-data",
         },
