@@ -4,6 +4,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import { FiPlusCircle, FiTag } from "react-icons/fi";
 import 'react-toastify/dist/ReactToastify.css';
 import "./Addcategory.css";
+import AxiosInstance from "../../components/AxiosInstance";
 
 const Addcategory = () => {
   const [categoryData, setCategoryData] = useState({
@@ -27,7 +28,7 @@ const Addcategory = () => {
     formPayload.append("category_name", categoryData.category_name);
 
     try {
-      await axios.post(
+      await AxiosInstance.post(
         "/api/createcategory/",
         formPayload
       );
