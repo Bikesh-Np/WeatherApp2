@@ -109,7 +109,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 CORS_ALLOWED_ORIGINS = [
     "https://resqlinkfront.netlify.app",
     "https://resqlink-frontend.onrender.com",
-    "http://localhost:3000",
+    "http://localhost:3000"
 ]
 
 CORS_ALLOW_CREDENTIALS = True
