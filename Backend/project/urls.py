@@ -53,6 +53,8 @@ urlpatterns = [
     # User Authentication Routes
     path('register/', RegisterUser.as_view(), name='register'),
     path('login/', LoginUser.as_view(), name='login'),
+    path('send-otp/', SendOTP.as_view(), name='send-otp'),
+    path('verify-otp/', VerifyOTP.as_view(), name='verify-otp'),
     path('assignments/', AssignVolunteerView.as_view(), name='assign-volunteer'),
     path('api/assignments/', AssignmentListAPIView.as_view(), name='assignment-list'),  # New API endpoint
     path('assignments/<int:pk>/', AssignmentRetrieveUpdateDestroyAPIView.as_view(), name='assignment-detail'),
@@ -69,8 +71,8 @@ urlpatterns = [
     path('reset/', PasswordResetRequestView.as_view(), name='password_reset_request'),
     path('reset/<uidb64>/<token>/', PasswordResetConfirmView.as_view(), name='password_reset_confirm'),
 
-    path('adminregister/', RegisterUser.as_view(), name='register'),  # Duplicate for consistency or different user type
-    path('admin-login/', AdminLoginUser.as_view(), name='admin_login'),  # Admin Login Endpoint
+    path('adminregister/', RegisterUser.as_view(), name='register'),  
+    path('admin-login/', AdminLoginUser.as_view(), name='admin_login'),  
     path('verify-user/<int:user_id>/', verify_user, name='verify-user'),
     path('users/', UserListView.as_view(), name='user-list'),
     path('delete_user/<int:user_id>/', delete_user, name='delete_user'),

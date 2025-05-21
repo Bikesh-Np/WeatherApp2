@@ -31,15 +31,75 @@ from django.utils.encoding import force_bytes, force_str
 from django.core.mail import send_mail
 from django.conf import settings
 from twilio.rest import Client  # Add this import at the top of your views.py
+import random
+from django.core.cache import cache
+from django.core.mail import send_mail
+from django.conf import settings
+from rest_framework.response import Response
+from rest_framework import status
 
 # Get the user model
 User = get_user_model()
 
+# Add these imports at the top of your views.py
+
+# Add these new views to your views.py
+class SendOTP(APIView):
+    def post(self, request):
+        email = request.data.get('email')
+        if not email:
+            return Response({'error': 'Email is required'}, status=status.HTTP_400_BAD_REQUEST)
+        
+        # Generate 6-digit OTP
+        otp = str(random.randint(100000, 999999))
+        
+        # Store OTP in cache with email as key (expires in 10 minutes)
+        cache.set(f'registration_otp_{email}', otp, timeout=600)
+        
+        # Send email with OTP
+        subject = 'Your Registration OTP'
+        message = f'Your OTP for registration is: {otp}\n\nThis OTP is valid for 10 minutes.'
+        email_from = settings.EMAIL_HOST_USER
+        recipient_list = [email]
+        
+        try:
+            send_mail(subject, message, email_from, recipient_list)
+            return Response({'message': 'OTP sent successfully'}, status=status.HTTP_200_OK)
+        except Exception as e:
+            return Response({'error': str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
+class VerifyOTP(APIView):
+    def post(self, request):
+        email = request.data.get('email')
+        otp = request.data.get('otp')
+        
+        if not email or not otp:
+            return Response({'error': 'Email and OTP are required'}, status=status.HTTP_400_BAD_REQUEST)
+        
+        cached_otp = cache.get(f'registration_otp_{email}')
+        
+        if not cached_otp:
+            return Response({'error': 'OTP expired or not generated'}, status=status.HTTP_400_BAD_REQUEST)
+        
+        if cached_otp == otp:
+            # Mark email as verified in cache (valid for 1 hour)
+            cache.set(f'email_verified_{email}', True, timeout=3600)
+            return Response({'message': 'OTP verified successfully'}, status=status.HTTP_200_OK)
+        else:
+            return Response({'error': 'Invalid OTP'}, status=status.HTTP_400_BAD_REQUEST)
+
+# Update your RegisterUser view to check for verified email
 class RegisterUser(generics.CreateAPIView):
     queryset = User.objects.all()
     serializer_class = RegisterSerializer
 
     def perform_create(self, serializer):
+        email = self.request.data.get('email')
+        
+        # Check if email is verified
+        if not cache.get(f'email_verified_{email}'):
+            raise serializers.ValidationError({'email': 'Email not verified. Please complete OTP verification first.'})
+        
         role = self.request.data.get('role', 'user')
         user = serializer.save()
 
@@ -50,7 +110,9 @@ class RegisterUser(generics.CreateAPIView):
             user.is_superuser = False
             user.is_staff = True
         user.save()
-
+        
+        # Clear the verification flag after successful registrations
+        cache.delete(f'email_verified_{email}')
 
 class LoginUser(APIView):
     def post(self, request):
@@ -113,7 +175,7 @@ def verify_user(request, user_id):
     return Response({"message": "User verification status updated successfully."})
 
 
-# API to Register Volunteers
+# API to Register Volunteer
 class VolunteerCreateView(generics.CreateAPIView):
     queryset = Volunt.objects.all()
     serializer_class = VoluntSerializer
@@ -169,7 +231,7 @@ Your account has been verified by the admin. You can now log in and access all f
 Best regards,
 The Team"""
             
-            # Send SMS
+            #  Send SMS
             message = client.messages.create(
                 body=message_body,
                 from_=settings.TWILIO_PHONE_NUMBER,
@@ -187,7 +249,7 @@ The Team"""
                 "message": "Account verified but failed to send SMS notification"
             }, status=status.HTTP_200_OK)
 
-# Assign Volunteer to Location
+# Assign Volunteer to Locations
 
 class AssignVolunteerView(generics.CreateAPIView):
     queryset = Assignment.objects.all()
@@ -501,7 +563,6 @@ class AssignmentRetrieveUpdateDestroyAPIView(generics.RetrieveUpdateDestroyAPIVi
     serializer_class = AssignmentSerializer
 
 
-# In your views.py
 import os
 from django.http import JsonResponse
 from .disaster_services import DisasterService

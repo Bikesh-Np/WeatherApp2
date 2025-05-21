@@ -6,12 +6,14 @@ import os
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+# Specify the path for the .env file
+env_path = BASE_DIR / '.env'
+
 # Quick-start development settings - unsuitable for production
 SECRET_KEY = config('SECRET_KEY')
 DEBUG = config('DEBUG', default=False, cast=bool)
 ALLOWED_HOSTS = config('ALLOWED_HOSTS', default='localhost,127.0.0.1', cast=Csv())
-
-# Application definition
+# Installed apps
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -25,8 +27,17 @@ INSTALLED_APPS = [
     'rest_framework_simplejwt',
 ]
 
+# Custom user model
 AUTH_USER_MODEL = 'app.CustomUser'
 
+# Django REST Framework configuration
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
+    )
+}
+
+# Middleware
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'whitenoise.middleware.WhiteNoiseMiddleware',
@@ -41,6 +52,7 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'project.urls'
 
+# Templates
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
@@ -57,17 +69,18 @@ TEMPLATES = [
     },
 ]
 
+# WSGI application
 WSGI_APPLICATION = 'project.wsgi.application'
 
-# Database
+# Database configuration
 DATABASES = {
     'default': {
         "ENGINE": "django.db.backends.postgresql",
-        "NAME": config('DB_NAME', 'resqlinksys'),
-        "USER": config('DB_USER', 'bikesh'),
-        "PASSWORD": config('DB_PASSWORD', 'bikesh'),
-        "HOST": config('DB_HOST', '127.0.0.1'),
-        "PORT": config('DB_PORT', '5432'),
+        "NAME": "resqlinksys",
+        "USER": "bikesh",
+        "PASSWORD": "bikesh",
+        "HOST": "127.0.0.1",
+        "PORT": "5432",
     }
 }
 
@@ -79,32 +92,24 @@ AUTH_PASSWORD_VALIDATORS = [
     {'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator'},
 ]
 
-# Internationalization
+# Localization settings
 LANGUAGE_CODE = 'en-us'
 TIME_ZONE = 'UTC'
 USE_I18N = True
 USE_TZ = True
 
-# Static files (CSS, JavaScript, Images)
+# Static and Media files
 STATIC_URL = 'static/'
-STATIC_ROOT = BASE_DIR / 'staticfiles'
+STATIC_ROOT = BASE_DIR / 'staticfiles'  # For production
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-# REST Framework
-REST_FRAMEWORK = {
-    'DEFAULT_AUTHENTICATION_CLASSES': (
-        'rest_framework_simplejwt.authentication.JWTAuthentication',
-    )
-}
-
-# CORS
+# CORS settings
 CORS_ALLOWED_ORIGINS = config('CORS_ALLOWED_ORIGINS', default='http://localhost:3000', cast=Csv())
-CSRF_TRUSTED_ORIGINS = config('CSRF_TRUSTED_ORIGINS', default='http://localhost:3000', cast=Csv())
 
-# JWT
+# JWT configurations
 SIMPLE_JWT = {
     "ACCESS_TOKEN_LIFETIME": timedelta(minutes=15),
     "REFRESH_TOKEN_LIFETIME": timedelta(days=7),
@@ -112,7 +117,7 @@ SIMPLE_JWT = {
     "BLACKLIST_AFTER_ROTATION": True,
 }
 
-# Email
+
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com' 
 EMAIL_PORT = 587
@@ -120,25 +125,7 @@ EMAIL_USE_TLS = True
 EMAIL_HOST_USER = 'resqlinkmanagement@gmail.com'  
 EMAIL_HOST_PASSWORD = 'pvzq wqrr gezj bnpz' 
 
-# Twilio (should be in environment variables)
+# Twilio Configurations
 TWILIO_ACCOUNT_SID = config('TWILIO_ACCOUNT_SID')
 TWILIO_AUTH_TOKEN = config('TWILIO_AUTH_TOKEN')
 TWILIO_PHONE_NUMBER = config('TWILIO_PHONE_NUMBER')
-
-# Security
-if not DEBUG:
-    SECURE_SSL_REDIRECT = True
-    SESSION_COOKIE_SECURE = True
-    CSRF_COOKIE_SECURE = True
-
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = 'smtp.gmail.com' 
-EMAIL_PORT = 587
-EMAIL_USE_TLS = True
-EMAIL_HOST_USER = 'resqlinkmanagement@gmail.com'  
-EMAIL_HOST_PASSWORD = 'pvzq wqrr gezj bnpz' 
-
-# Twilio Configuration
-TWILIO_ACCOUNT_SID = 'AC6986e80fa1aeec95771a94ad827285f0'
-TWILIO_AUTH_TOKEN = '9213e6907c52c3e55c6d6bc388c9f98b'
-TWILIO_PHONE_NUMBER = '+12402908287'

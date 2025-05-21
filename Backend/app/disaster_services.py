@@ -31,11 +31,11 @@ class DisasterService:
             }
         }
         
-        # Calculate flood risks
+        # Calculate flood risk
         if rainfall >= FLOOD_THRESHOLD:
             risks['flood']['risk'] = 'high' if rainfall > FLOOD_THRESHOLD * 1.5 else 'moderate'
         
-        # Calculate landslide risk (typically needs more rain than floods)
+        # Calculate landslide risk (typically needs more rain than flood)
         if rainfall >= LANDSLIDE_THRESHOLD:
             risks['landslide']['risk'] = 'high' if rainfall > LANDSLIDE_THRESHOLD * 1.5 else 'moderate'
         
