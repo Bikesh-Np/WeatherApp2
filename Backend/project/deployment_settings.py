@@ -13,7 +13,7 @@ if render_hostname:
 
 # CORS origins for deployed frontend URL
 CORS_ALLOWED_ORIGINS = [
-    'https://weatherapp2-ygrv.onrender.com',
+    'https://resqlink-frontend.onrender.com',
 ]
 
 # Whitenoise static files storage for production
