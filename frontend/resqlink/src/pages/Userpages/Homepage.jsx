@@ -1,8 +1,5 @@
 import React, { useEffect, useState, useMemo } from "react";
 import { useNavigate } from "react-router-dom";
-import image1 from "../../img/1.png";
-import image2 from "../../img/2.jpeg";
-import image3 from "../../img/3.png";
 import { FaDonate, FaHandsHelping, FaUsers, FaHome, FaSearch, FaChevronLeft, FaChevronRight, FaTimes, FaHeart, FaShieldAlt } from "react-icons/fa";
 import "./Homepage.css";
 import AxiosInstance from "../../components/AxiosInstance";
@@ -16,46 +13,66 @@ const Homepage = () => {
   const [selectedCategory, setSelectedCategory] = useState('');
   const [priceRange, setPriceRange] = useState([0, 10000]);
   const [donationAmount, setDonationAmount] = useState('');
+  const [carouselItems, setCarouselItems] = useState([
+    {
+      image_url: "/images/default-carousel-1.jpg",
+      title: "Loading...",
+      description: "Please wait while we load content"
+    }
+  ]);
   const navigate = useNavigate();
 
-  const carouselItems = [
-    {
-      image: image1,
-      title: "Japanese Rescue Team Assesses Earthquake Damage in Nepal",
-      description: "A Japanese rescue team arrived in Nepal to survey the devastation caused by the earthquake. Their assessment aims to support relief efforts and provide critical aid to affected communities."
-    },
-    {
-      image: image2,
-      title: "Open Mic Nepal: Fighting Misinformation Post-Earthquake",
-      description: "In response to the 2015 earthquake, Internews launched Open Mic Nepal to track and debunk misinformation. Collaborating with local organizations and journalists, the project delivered verified information to counter harmful rumors."
-    },
-    {
-      image: image3,
-      title: "Nepal's Flood Tragedy: A National Disaster",
-      description: "Monsoon floods have claimed over 200 lives, leaving Nepal in crisis. With inadequate preparedness and delayed response, the government faces criticism for failing to protect citizens."
-    }
-  ];
-
+  // Fetch all necessary data
   useEffect(() => {
-    const fetchProducts = async () => {
+    const fetchData = async () => {
       try {
-        const response = await AxiosInstance.get("/api/products");
-        setData(response.data);
-        const uniqueCategories = [...new Set(response.data.map(item => item.category_name))];
+        setLoading(true);
+        
+        // Fetch products
+        const productsResponse = await AxiosInstance.get("/api/products");
+        setData(productsResponse.data);
+        
+        // Fetch carousel items
+        const carouselResponse = await AxiosInstance.get("/api/carousel");
+        if (carouselResponse.data.length > 0) {
+          setCarouselItems(carouselResponse.data);
+        }
+        
+        // Extract unique categories
+        const uniqueCategories = [...new Set(productsResponse.data.map(item => item.category_name))];
         setCategories(uniqueCategories);
+        
       } catch (error) {
-        console.error("Error fetching products:", error);
+        console.error("Error fetching data:", error);
+        // Fallback carousel items if API fails
+        setCarouselItems([
+          {
+            image_url: "/images/default-carousel-1.jpg",
+            title: "Emergency Relief Efforts",
+            description: "Our team is working hard to provide assistance"
+          },
+          {
+            image_url: "/images/default-carousel-2.jpg",
+            title: "Community Support",
+            description: "Join us in helping those affected"
+          }
+        ]);
+      } finally {
+        setLoading(false);
       }
     };
 
-    fetchProducts();
+    fetchData();
   }, []);
 
+  // Carousel auto-rotation effect
   useEffect(() => {
-    const interval = setInterval(() => {
-      setActiveIndex(prev => (prev === carouselItems.length - 1 ? 0 : prev + 1));
-    }, 5000);
-    return () => clearInterval(interval);
+    if (carouselItems.length > 1) { // Only rotate if we have multiple items
+      const interval = setInterval(() => {
+        setActiveIndex(prev => (prev === carouselItems.length - 1 ? 0 : prev + 1));
+      }, 5000);
+      return () => clearInterval(interval);
+    }
   }, [carouselItems.length]);
 
   const filteredProducts = useMemo(() => {
@@ -138,7 +155,7 @@ const Homepage = () => {
         <div className="premium-carousel">
           {carouselItems.map((item, index) => (
             <div 
-              key={index}
+              key={item.id || index}
               className={`premium-carousel-item ${index === activeIndex ? 'active' : ''}`}
               style={{
                 opacity: index === activeIndex ? 1 : 0,
@@ -146,10 +163,13 @@ const Homepage = () => {
               }}
             >
               <img 
-                src={item.image} 
+                src={item.image_url}
                 className="premium-carousel-image" 
                 alt={item.title} 
                 loading={index === activeIndex ? "eager" : "lazy"}
+                onError={(e) => {
+                  e.target.src = "/images/default-carousel.jpg";
+                }}
               />
               <div className="premium-carousel-overlay"></div>
               <div 
@@ -165,12 +185,16 @@ const Homepage = () => {
             </div>
           ))}
           
-          <button className="premium-carousel-control prev" onClick={prevSlide} aria-label="Previous slide">
-            <FaChevronLeft />
-          </button>
-          <button className="premium-carousel-control next" onClick={nextSlide} aria-label="Next slide">
-            <FaChevronRight />
-          </button>
+          {carouselItems.length > 1 && (
+            <>
+              <button className="premium-carousel-control prev" onClick={prevSlide} aria-label="Previous slide">
+                <FaChevronLeft />
+              </button>
+              <button className="premium-carousel-control next" onClick={nextSlide} aria-label="Next slide">
+                <FaChevronRight />
+              </button>
+            </>
+          )}
           
           <div className="premium-carousel-indicators">
             {carouselItems.map((_, index) => (
@@ -272,14 +296,14 @@ const Homepage = () => {
               <div className="premium-product-card" key={item.id}>
                 <div className="product-image-container">
                   <img 
-                    src={item.image || "/images/placeholder-product.jpg"} 
+                    src={item.image_url || "/images/placeholder-product.jpg"}
                     alt={item.product_name} 
                     className="product-image" 
                     onError={(e) => {
                       e.target.src = "/images/placeholder-product.jpg";
                     }}
                   />
-                  <div className="product-tag">Popular</div>
+                  {item.is_popular && <div className="product-tag">Popular</div>}
                 </div>
                 
                 <div className="product-details">
@@ -323,10 +347,13 @@ const Homepage = () => {
         <div className="relief-container">
           <div className="relief-image-wrapper">
             <img 
-              src="https://images.unsplash.com/photo-1582213782179-e0d53f98f2ca?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" 
+              src="/images/donation-banner.jpg"
               alt="Disaster victims receiving aid" 
               className="relief-image"
               loading="lazy"
+              onError={(e) => {
+                e.target.src = "/images/default-donation-banner.jpg";
+              }}
             />
             <div className="image-overlay">
               <h3>Your Help Matters</h3>
