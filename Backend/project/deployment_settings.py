@@ -2,13 +2,14 @@ import os
 import dj_database_url
 from .settings import *
 from .settings import BASE_DIR
+from decouple import config, Csv
 
 # Security settings
 DEBUG = False
-SECRET_KEY = os.environ.get('SECRET_KEY')
+SECRET_KEY = '0&%f#*)%vy+5_a@u(*e)#faq!q(*34@cq)4((eno)pz*g4gzjv'
 
 # Host settings
-RENDER_EXTERNAL_HOSTNAME = os.environ.get('RENDER_EXTERNAL_HOSTNAME')
+RENDER_EXTERNAL_HOSTNAME = 'resqlink-backend.onrender.com'
 if RENDER_EXTERNAL_HOSTNAME:
     ALLOWED_HOSTS = [RENDER_EXTERNAL_HOSTNAME, 'resqlink-backend.onrender.com']
     CSRF_TRUSTED_ORIGINS = [f'https://{RENDER_EXTERNAL_HOSTNAME}']
@@ -95,4 +96,3 @@ LOGGING = {
 }
 
 # Admin settings
-ADMINS = [("Your Name", "your-email@example.com")]
