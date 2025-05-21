@@ -55,7 +55,7 @@ const AdminLogin = () => {
 
     try {
       const response = await axios.post(
-        "http://127.0.0.1:8000/admin-login/", 
+        "/admin-login/", 
         credentials, 
         { 
           headers: { "Content-Type": "application/json" },

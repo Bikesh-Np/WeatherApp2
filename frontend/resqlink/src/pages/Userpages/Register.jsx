@@ -55,7 +55,7 @@ const Register = () => {
 
     setIsSendingOtp(true);
     try {
-      const response = await axios.post("http://127.0.0.1:8000/send-otp/", {
+      const response = await axios.post("/send-otp/", {
         email: formData.email
       });
 
@@ -77,7 +77,7 @@ const Register = () => {
     }
 
     try {
-      const response = await axios.post("http://127.0.0.1:8000/verify-otp/", {
+      const response = await axios.post("/verify-otp/", {
         email: formData.email,
         otp: otp
       });
@@ -134,7 +134,7 @@ const Register = () => {
     formDataToSend.append("role", role);
 
     try {
-      const response = await axios.post("http://127.0.0.1:8000/register/", formDataToSend, {
+      const response = await axios.post("/register/", formDataToSend, {
         headers: { "Content-Type": "multipart/form-data" },
       });
 

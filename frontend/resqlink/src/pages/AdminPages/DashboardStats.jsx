@@ -21,7 +21,7 @@ const DashboardStats = () => {
 
   useEffect(() => {
     axios
-      .get("http://127.0.0.1:8000/dashboard/stats/")
+      .get("/dashboard/stats/")
       .then((response) => {
         setStats(response.data);
         setLoading(false);

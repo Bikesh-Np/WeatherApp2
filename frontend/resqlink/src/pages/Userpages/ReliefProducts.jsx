@@ -18,7 +18,7 @@ const ReliefProducts = () => {
 
   useEffect(() => {
     axios
-      .get("http://127.0.0.1:8000/api/products")
+      .get("/api/products")
       .then((res) => {
         setData(res.data);
         const uniqueCategories = [...new Set(res.data.map(item => item.category_name))];

@@ -13,7 +13,7 @@ const VolunteerList = () => {
   useEffect(() => {
     const fetchVolunteers = async () => {
       try {
-        const response = await axios.get("http://127.0.0.1:8000/regvol/");
+        const response = await axios.get("/regvol/");
         setVolunteers(response.data);
       } catch (err) {
         setError("Failed to fetch volunteers.");

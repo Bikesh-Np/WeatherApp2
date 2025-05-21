@@ -17,7 +17,7 @@ const AssignmentList = () => {
 
   const fetchAssignments = async () => {
     try {
-      const response = await axios.get("http://127.0.0.1:8000/api/assignments/");
+      const response = await axios.get("/api/assignments/");
       setAssignments(response.data);
     } catch (err) {
       setError("Failed to fetch assignments.");

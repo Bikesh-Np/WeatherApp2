@@ -18,6 +18,7 @@ import { FaLeaf } from "react-icons/fa";
 import logo from "../../img/logo.png";
 import defaultProfile from "../../img/profile.jpg";
 import './header.css';
+import AxiosInstance from "../AxiosInstance";
 
 const Header = () => {
   const [profileImage, setProfileImage] = useState(null);
@@ -34,7 +35,7 @@ const Header = () => {
           return;
         }
 
-        const response = await axios.get("http://127.0.0.1:8000/profile/", {
+        const response = await AxiosInstance.get("/profile/", {
           headers: { Authorization: `Bearer ${token}` },
         });
 

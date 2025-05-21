@@ -15,7 +15,7 @@ const ForgotPassword = () => {
     setIsSubmitting(true);
     
     try {
-      await axios.post("http://127.0.0.1:8000/reset/", { email });
+      await axios.post("/reset/", { email });
       toast.success("🌿 Password reset link sent!");
       setEmail("");
     } catch (err) {

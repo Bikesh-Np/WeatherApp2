@@ -13,7 +13,7 @@ const VolunterProfile = () => {
   const fetchVolunteers = async () => {
     setIsFetching(true);
     try {
-      const response = await fetch("http://127.0.0.1:8000/regvol/");
+      const response = await fetch("/regvol/");
       if (response.ok) {
         const data = await response.json();
         setVolunteerData(data);

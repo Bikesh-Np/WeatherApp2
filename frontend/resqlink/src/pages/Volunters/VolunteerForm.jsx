@@ -81,7 +81,7 @@ const VolunteerForm = () => {
     });
 
     try {
-      const response = await fetch("http://127.0.0.1:8000/vol/", {
+      const response = await fetch("/vol/", {
         method: "POST",
         body: formDataToSend,
       });

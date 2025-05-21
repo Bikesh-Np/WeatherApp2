@@ -27,7 +27,7 @@ const AdminRegister = () => {
 
     try {
       const response = await axios.post(
-        "http://127.0.0.1:8000/register/", // Adjust this endpoint as needed
+        "/register/", // Adjust this endpoint as needed
         {
           email,
           first_name,

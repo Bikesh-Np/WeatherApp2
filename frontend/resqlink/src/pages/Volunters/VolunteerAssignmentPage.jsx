@@ -34,7 +34,7 @@ const VolunteerAssignmentPage = () => {
     const fetchVerifiedVolunteers = async () => {
       try {
         const response = await fetch(
-          "http://127.0.0.1:8000/regvol/?verified=true"
+          "/regvol/?verified=true"
         );
         if (response.ok) {
           const data = await response.json();
@@ -80,7 +80,7 @@ const VolunteerAssignmentPage = () => {
     e.preventDefault();
 
     try {
-      const response = await fetch("http://127.0.0.1:8000/assignments/", {
+      const response = await fetch("/assignments/", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -105,7 +105,7 @@ const VolunteerAssignmentPage = () => {
 
         // Refresh the assignments list if needed
         const refreshResponse = await fetch(
-          "http://127.0.0.1:8000/regvol/?verified=true"
+          "/regvol/?verified=true"
         );
         if (refreshResponse.ok) {
           setVerifiedVolunteers(await refreshResponse.json());

@@ -14,7 +14,7 @@ const Category = () => {
   useEffect(() => {
     const fetchCategories = async () => {
       try {
-        const response = await axios.get("http://127.0.0.1:8000/api/category");
+        const response = await axios.get("/api/category");
         setCategories(response.data);
       } catch (error) {
         toast.error("Failed to load categories");

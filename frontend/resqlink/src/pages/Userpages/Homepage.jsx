@@ -6,6 +6,7 @@ import image3 from "../../img/3.png";
 import { FaDonate,FaHandsHelping, FaUsers, FaHome, FaSearch, FaChevronLeft, FaChevronRight, FaTimes, FaHeart, FaShieldAlt } from "react-icons/fa";
 import "./Homepage.css";
 import axios from "axios";
+import AxiosInstance from "../../components/AxiosInstance";
 
 const Homepage = () => {
   const [data, setData] = useState([]);
@@ -37,8 +38,8 @@ const Homepage = () => {
   ];
 
   useEffect(() => {
-    axios
-      .get("http://127.0.0.1:8000/api/products")
+    AxiosInstance
+      .get("/api/products")
       .then((res) => {
         setData(res.data);
         const uniqueCategories = [...new Set(res.data.map(item => item.category_name))];

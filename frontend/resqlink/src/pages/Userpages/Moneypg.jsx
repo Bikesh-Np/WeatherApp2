@@ -123,7 +123,7 @@ const Moneypg = () => {
     setLoading(true);
 
     try {
-      await axios.post("http://127.0.0.1:8000/api/save-product/", {
+      await axios.post("/api/save-product/", {
         full_name: formData.full_name,
         phone_number: formData.phone_number,
         amount: formData.amount,

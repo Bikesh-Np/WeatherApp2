@@ -47,7 +47,7 @@ const AdminUserList = () => {
           throw new Error("No authentication token found. Please log in.");
         }
 
-        const response = await axios.get("http://127.0.0.1:8000/users/", {
+        const response = await axios.get("/users/", {
           headers: {
             Authorization: `Bearer ${token}`,
             "Content-Type": "application/json",

@@ -21,7 +21,7 @@ const PaymentList = () => {
   useEffect(() => {
     const fetchPayments = async () => {
       try {
-        const response = await axios.get("http://127.0.0.1:8000/api/get-payments/");
+        const response = await axios.get("/api/get-payments/");
         setRecords(response.data);
         setLoading(false);
       } catch (error) {

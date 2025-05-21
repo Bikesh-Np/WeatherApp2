@@ -10,7 +10,7 @@ import { Link } from "react-router-dom";
 const sendProductDetails = async (productData) => {
   try {
     const response = await axios.post(
-      "http://127.0.0.1:8000/api/save-product/",
+      "/api/save-product/",
       {
         full_name: productData.fullName,
         phone_number: productData.phoneNumber,
