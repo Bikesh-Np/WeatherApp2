@@ -110,6 +110,7 @@ CORS_ALLOWED_ORIGINS = [
     "https://resqlinkfront.netlify.app",
     "http://localhost:3000",
 ]
+CORS_ALLOW_CREDENTIALS = True
 
 
 # JWT configurations
