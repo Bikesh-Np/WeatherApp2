@@ -63,7 +63,7 @@ const Header = () => {
     <Navbar expand="lg" bg="dark" variant="dark" sticky="top" className="py-3">
       <Container className="d-flex align-items-center">
         {/* Logo */}
-        <Navbar.Brand href="http://localhost:3000/" className="me-auto d-flex align-items-center">
+        <Navbar.Brand href="http://bikeshmaharjan2023.com.np/" className="me-auto d-flex align-items-center">
           <img src={logo} alt="ResQLink Logo" width="60" height="60" className="me-2" />
           <span className="brand-text fw-bold text-light">
             ResQLink <FaLeaf className="ms-1" />
@@ -73,16 +73,16 @@ const Header = () => {
         <Navbar.Toggle aria-controls="navbar-nav" />
         <Navbar.Collapse id="navbar-nav" className="justify-content-end">
           <Nav>
-            <Nav.Link href="http://localhost:3000/" className="d-flex align-items-center">
+            <Nav.Link href="http://bikeshmaharjan2023.com.np/" className="d-flex align-items-center">
               <FiHome className="me-1" /> Home
             </Nav.Link>
-            <Nav.Link href="http://localhost:3000/service" className="d-flex align-items-center">
+            <Nav.Link href="http://bikeshmaharjan2023.com.np/service" className="d-flex align-items-center">
               <FiAlertTriangle className="me-1" /> Disaster Updates
             </Nav.Link>
-            <Nav.Link href="http://localhost:3000/registervolunteer" className="d-flex align-items-center">
+            <Nav.Link href="http://bikeshmaharjan2023.com.np/registervolunteer" className="d-flex align-items-center">
               <FiUsers className="me-1" /> Volunteers
             </Nav.Link>
-            <Nav.Link href="http://localhost:3000/resources" className="d-flex align-items-center">
+            <Nav.Link href="http://bikeshmaharjan2023.com.np/resources" className="d-flex align-items-center">
               <FiPackage className="me-1" /> Resources
             </Nav.Link>
             <Nav.Link href="contactus" className="d-flex align-items-center">

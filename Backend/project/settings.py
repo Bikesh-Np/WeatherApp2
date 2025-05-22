@@ -4,7 +4,7 @@ from decouple import config, Csv
 import os
 import dj_database_url
 
-BASE_DIR = Path(__file__).resolve().parent.parent  # adjust to your project root, e.g. .../project/../..
+BASE_DIR = Path(__file__).resolve().parent.parent.parent  # adjust to your project root, e.g. .../project/../..
 
 # SECURITY
 SECRET_KEY = config('SECRET_KEY')
@@ -107,7 +107,8 @@ SIMPLE_JWT = {
 CORS_ALLOWED_ORIGINS = [
     "https://resqlinkfront.netlify.app",
     "https://resqlink-frontend.onrender.com",
-    "http://localhost:3000",
+    "http://bikeshmaharjan2023.com.np",
+    "http://localhost:3000"
 ]
 
 CORS_ALLOW_CREDENTIALS = True
