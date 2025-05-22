@@ -1,18 +1,14 @@
 import os
-import dj_database_url
-from .settings import *  # Base settings
-from .settings import BASE_DIR
+from .settings import *  # Import all from base settings
 
 RENDER_EXTERNAL_HOSTNAME = os.environ.get('RENDER_EXTERNAL_HOSTNAME', 'render-placeholder.com')
 
-# Override debug and security settings
 DEBUG = False
 SECRET_KEY = os.environ.get('SECRET_KEY', SECRET_KEY)
 
 ALLOWED_HOSTS = [RENDER_EXTERNAL_HOSTNAME]
 CSRF_TRUSTED_ORIGINS = [f'https://{RENDER_EXTERNAL_HOSTNAME}']
 
-# S3 static/media
 USE_S3 = os.environ.get('USE_S3') == 'True'
 
 if USE_S3:
@@ -29,6 +25,7 @@ if USE_S3:
     PUBLIC_MEDIA_LOCATION = 'media'
     MEDIA_URL = f'https://{AWS_S3_CUSTOM_DOMAIN}/{PUBLIC_MEDIA_LOCATION}/'
     DEFAULT_FILE_STORAGE = 'project.storage_backends.PublicMediaStorage'
+
 else:
     STATIC_URL = '/static/'
     STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
@@ -36,7 +33,7 @@ else:
     MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
     os.makedirs(MEDIA_ROOT, exist_ok=True)
 
-# CORS override (if needed)
+# You can add or extend CORS origins if necessary
 CORS_ALLOWED_ORIGINS += [
     "https://resqlinkfront.netlify.app",
     "https://resqlink-frontend.onrender.com",

@@ -1,14 +1,12 @@
 import React, { useEffect, useState, useMemo } from "react";
 import { useNavigate } from "react-router-dom";
-import { FaDonate, FaHandsHelping, FaUsers, FaHome, FaSearch, FaChevronLeft, FaChevronRight, FaTimes, FaHeart, FaShieldAlt } from "react-icons/fa";
+import image1 from "../../img/1.png";
+import image2 from "../../img/2.jpeg";
+import image3 from "../../img/3.png";
+import { FaDonate,FaHandsHelping, FaUsers, FaHome, FaSearch, FaChevronLeft, FaChevronRight, FaTimes, FaHeart, FaShieldAlt } from "react-icons/fa";
 import "./Homepage.css";
+import axios from "axios";
 import AxiosInstance from "../../components/AxiosInstance";
-
-// Define base URL for API and media files
-const API_BASE_URL = process.env.REACT_APP_API_URL || "https://weatherapp2-1-v07l.onrender.com";
-const MEDIA_BASE_URL = process.env.NODE_ENV === 'development' 
-  ? 'http://localhost:8000' 
-  : API_BASE_URL;
 
 const Homepage = () => {
   const [data, setData] = useState([]);
@@ -21,58 +19,43 @@ const Homepage = () => {
   const [donationAmount, setDonationAmount] = useState('');
   const navigate = useNavigate();
 
-  // Carousel items with proper image paths
   const carouselItems = [
     {
-      image: `${MEDIA_BASE_URL}/media/carousel/1.png`,
+      image: image1,
       title: "Japanese Rescue Team Assesses Earthquake Damage in Nepal",
       description: "A Japanese rescue team arrived in Nepal to survey the devastation caused by the earthquake. Their assessment aims to support relief efforts and provide critical aid to affected communities."
     },
     {
-      image: `${MEDIA_BASE_URL}/media/carousel/2.jpeg`,
+      image: image2,
       title: "Open Mic Nepal: Fighting Misinformation Post-Earthquake",
       description: "In response to the 2015 earthquake, Internews launched Open Mic Nepal to track and debunk misinformation. Collaborating with local organizations and journalists, the project delivered verified information to counter harmful rumors."
     },
     {
-      image: `${MEDIA_BASE_URL}/media/carousel/3.png`,
+      image: image3,
       title: "Nepal's Flood Tragedy: A National Disaster",
       description: "Monsoon floods have claimed over 200 lives, leaving Nepal in crisis. With inadequate preparedness and delayed response, the government faces criticism for failing to protect citizens."
     }
   ];
 
-  // Fetch products from API
   useEffect(() => {
-    const fetchProducts = async () => {
-      try {
-        const response = await AxiosInstance.get("/api/products");
-        setData(response.data);
-        const uniqueCategories = [...new Set(response.data.map(item => item.category_name))];
+    AxiosInstance
+      .get("/api/products")
+      .then((res) => {
+        setData(res.data);
+        const uniqueCategories = [...new Set(res.data.map(item => item.category_name))];
         setCategories(uniqueCategories);
-      } catch (error) {
-        console.error("Error fetching products:", error);
-      }
-    };
-
-    fetchProducts();
+      })
+      .catch((e) => console.log(e));
   }, []);
 
-  // Auto-rotate carousel
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setActiveIndex(prev => (prev === carouselItems.length - 1 ? 0 : prev + 1));
-    }, 5000);
-    return () => clearInterval(interval);
-  }, [carouselItems.length]);
-
-  // Filter products based on search and filters
   const filteredProducts = useMemo(() => {
     return data.filter(product => {
       const searchTermLower = searchTerm.toLowerCase();
       const matchesSearch = 
         searchTerm === '' || 
-        product.product_name?.toLowerCase().includes(searchTermLower) ||
-        product.product_description?.toLowerCase().includes(searchTermLower) ||
-        product.category_name?.toLowerCase().includes(searchTermLower);
+        product.product_name.toLowerCase().includes(searchTermLower) ||
+        product.product_description.toLowerCase().includes(searchTermLower) ||
+        product.category_name.toLowerCase().includes(searchTermLower);
       
       const matchesCategory = !selectedCategory || product.category_name === selectedCategory;
       const matchesPrice = product.product_price >= priceRange[0] && product.product_price <= priceRange[1];
@@ -81,7 +64,6 @@ const Homepage = () => {
     });
   }, [data, searchTerm, selectedCategory, priceRange]);
 
-  // Handle product donation
   const handleDonateClick = (product) => {
     localStorage.setItem("selectedProduct", JSON.stringify(product));
     setLoading(true);
@@ -91,21 +73,18 @@ const Homepage = () => {
     }, 1500);
   };
 
-  // Handle monetary donation
   const handleMoneyDonation = () => {
-    const amount = parseFloat(donationAmount);
-    if (amount && amount > 0) {
+    if (donationAmount && donationAmount > 0) {
       setLoading(true);
       setTimeout(() => {
         setLoading(false);
-        navigate("/moneydonatepg", { state: { amount } });
+        navigate("/moneydonatepg", { state: { amount: donationAmount } });
       }, 1500);
     } else {
       alert('Please enter a valid donation amount');
     }
   };
 
-  // Carousel navigation
   const nextSlide = () => {
     setActiveIndex((prev) => (prev === carouselItems.length - 1 ? 0 : prev + 1));
   };
@@ -114,18 +93,13 @@ const Homepage = () => {
     setActiveIndex((prev) => (prev === 0 ? carouselItems.length - 1 : prev - 1));
   };
 
-  // Price range handler
   const handlePriceChange = (e, index) => {
     const value = parseInt(e.target.value) || 0;
     const newPriceRange = [...priceRange];
     newPriceRange[index] = value;
-    if (index === 1 && value < newPriceRange[0]) {
-      newPriceRange[0] = value;
-    }
     setPriceRange(newPriceRange);
   };
 
-  // Clear search and filters
   const clearSearch = () => setSearchTerm('');
   const resetAllFilters = () => {
     setSelectedCategory('');
@@ -135,7 +109,6 @@ const Homepage = () => {
 
   return (
     <div className="premium-home-container">
-      {/* Loading Overlay */}
       {loading && (
         <div className="premium-loading-overlay">
           <div className="premium-spinner">
@@ -147,7 +120,6 @@ const Homepage = () => {
         </div>
       )}
 
-      {/* Hero Carousel Section */}
       <section className="premium-carousel-section">
         <div className="premium-carousel">
           {carouselItems.map((item, index) => (
@@ -159,15 +131,7 @@ const Homepage = () => {
                 transform: `scale(${index === activeIndex ? 1 : 0.95})`
               }}
             >
-              <img 
-                src={item.image} 
-                className="premium-carousel-image" 
-                alt={item.title}
-                onError={(e) => {
-                  e.target.src = `${MEDIA_BASE_URL}/media/fallback-carousel.jpg`;
-                  e.target.onerror = null;
-                }}
-              />
+              <img src={item.image} className="premium-carousel-image" alt={item.title} />
               <div className="premium-carousel-overlay"></div>
               <div 
                 className="premium-carousel-content"
@@ -182,10 +146,10 @@ const Homepage = () => {
             </div>
           ))}
           
-          <button className="premium-carousel-control prev" onClick={prevSlide} aria-label="Previous slide">
+          <button className="premium-carousel-control prev" onClick={prevSlide}>
             <FaChevronLeft />
           </button>
-          <button className="premium-carousel-control next" onClick={nextSlide} aria-label="Next slide">
+          <button className="premium-carousel-control next" onClick={nextSlide}>
             <FaChevronRight />
           </button>
           
@@ -195,14 +159,14 @@ const Homepage = () => {
                 key={index}
                 className={`indicator ${index === activeIndex ? 'active' : ''}`}
                 onClick={() => setActiveIndex(index)}
-                aria-label={`Go to slide ${index + 1}`}
               />
             ))}
           </div>
         </div>
       </section>
 
-      {/* Products Section */}
+
+
       <section className="premium-products-section">
         <div className="premium-section-header">
           <div className="header-text">
@@ -214,7 +178,6 @@ const Homepage = () => {
           </div>
         </div>
 
-        {/* Filters */}
         <div className="premium-filters-container">
           <div className="premium-search-container premium-filter-group">
             <label htmlFor="product-search">Search:</label>
@@ -226,10 +189,9 @@ const Homepage = () => {
                 placeholder="Search by name, description or category..."
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
-                aria-label="Search products"
               />
               {searchTerm && (
-                <button className="clear-search-btn" onClick={clearSearch} aria-label="Clear search">
+                <button className="clear-search-btn" onClick={clearSearch}>
                   <FaTimes />
                 </button>
               )}
@@ -242,7 +204,6 @@ const Homepage = () => {
               id="category-filter"
               value={selectedCategory}
               onChange={(e) => setSelectedCategory(e.target.value)}
-              aria-label="Filter by category"
             >
               <option value="">All Categories</option>
               {categories.map((category, index) => (
@@ -260,7 +221,6 @@ const Homepage = () => {
                 value={priceRange[0]}
                 onChange={(e) => handlePriceChange(e, 0)}
                 min="0"
-                aria-label="Minimum price"
               />
               <span>to</span>
               <input
@@ -269,20 +229,18 @@ const Homepage = () => {
                 value={priceRange[1]}
                 onChange={(e) => handlePriceChange(e, 1)}
                 min={priceRange[0]}
-                aria-label="Maximum price"
               />
             </div>
           </div>
 
-          <button className="filter-res-btn" onClick={resetAllFilters} aria-label="Reset all filters">
+          <button className="filter-res-btn" onClick={resetAllFilters}>
             Reset All
           </button>
         </div>
 
-        {/* Products Grid */}
         {filteredProducts.length === 0 ? (
           <div className="premium-empty-state">
-            <div className="empty-state-image" aria-hidden="true"></div>
+            <img src="/images/no-products.svg" alt="No products found" />
             <h3>No relief products found</h3>
             <p>Try adjusting your search or check back later</p>
           </div>
@@ -291,22 +249,15 @@ const Homepage = () => {
             {filteredProducts.map((item) => (
               <div className="premium-product-card" key={item.id}>
                 <div className="product-image-container">
-                  <img 
-                    src={item.image ? `${MEDIA_BASE_URL}${item.image}` : `${MEDIA_BASE_URL}/media/placeholder-product.jpg`}
-                    alt={item.product_name}
-                    className="product-image"
-                    onError={(e) => {
-                      e.target.src = `${MEDIA_BASE_URL}/media/placeholder-product.jpg`;
-                      e.target.onerror = null;
-                    }}
-                  />
+                  <img src={item.image} alt={item.product_name} className="product-image" />
+        
                   <div className="product-tag">Popular</div>
                 </div>
                 
                 <div className="product-details">
                   <div className="product-meta">
                     <h3 className="product-name">{item.product_name}</h3>
-                    <span className="product-price">Rs. {item.product_price?.toLocaleString()}</span>
+                    <span className="product-price">Rs. {item.product_price}</span>
                     <span className="product-category">{item.category_name}</span>
                   </div>
                   
@@ -318,7 +269,6 @@ const Homepage = () => {
                     <button
                       className="premium-donate-button"
                       onClick={() => handleDonateClick(item)}
-                      aria-label={`Donate ${item.product_name}`}
                     >
                       <FaDonate className="button-icon" /> Donate Now
                     </button>
@@ -329,8 +279,7 @@ const Homepage = () => {
           </div>
         )}
       </section>
-
-      {/* Donation Section */}
+            {/* Money Donation Section */}
       <section className="premium-products-section">
         <div className="premium-section-header">
           <div className="header-text">
@@ -342,93 +291,77 @@ const Homepage = () => {
           </div>
         </div>
   
-        <div className="relief-container">
-          <div className="relief-image-wrapper">
-            <img 
-              src={`${MEDIA_BASE_URL}/media/disaster-aid.jpg`}
-              alt="Disaster victims receiving aid"
-              className="relief-image"
-              loading="lazy"
-              onError={(e) => {
-                e.target.src = `${MEDIA_BASE_URL}/media/fallback-disaster.jpg`;
-                e.target.onerror = null;
-              }}
+  <div className="relief-container">
+    <div className="relief-image-wrapper">
+      <img 
+        src="https://images.unsplash.com/photo-1582213782179-e0d53f98f2ca?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" 
+        alt="Disaster victims receiving aid" 
+        className="relief-image"
+      />
+      <div className="image-overlay">
+        <h3>Your Help Matters</h3>
+        <p>Join us in supporting disaster victims</p>
+      </div>
+    </div>
+    
+    <div className="donation-card">
+      <div className="card-header">
+        <div className="icon-circle">
+          <FaHandsHelping className="help-icon" />
+        </div>
+        <h2>Emergency Relief Fund</h2>
+        <p className="subtitle">Provide immediate assistance to affected families</p>
+      </div>
+      
+      <div className="donation-form">
+        <div className="form-group">
+          <label>Your Donation Amount</label>
+          <div className="input-container">
+            <span className="currency">Rs.</span>
+            <input
+              type="number"
+              placeholder="0.00"
+              min="1"
+              value={donationAmount}
+              onChange={(e) => setDonationAmount(e.target.value)}
             />
-            <div className="image-overlay">
-              <h3>Your Help Matters</h3>
-              <p>Join us in supporting disaster victims</p>
-            </div>
-          </div>
-          
-          <div className="donation-card">
-            <div className="card-header">
-              <div className="icon-circle">
-                <FaHandsHelping className="help-icon" />
-              </div>
-              <h2>Emergency Relief Fund</h2>
-              <p className="subtitle">Provide immediate assistance to affected families</p>
-            </div>
-            
-            <div className="donation-form">
-              <div className="form-group">
-                <label htmlFor="donation-amount">Your Donation Amount</label>
-                <div className="input-container">
-                  <span className="currency">Rs.</span>
-                  <input
-                    id="donation-amount"
-                    type="number"
-                    placeholder="0.00"
-                    min="1"
-                    value={donationAmount}
-                    onChange={(e) => setDonationAmount(e.target.value)}
-                    aria-label="Donation amount"
-                  />
-                </div>
-              </div>
-              
-              <div className="quick-donations">
-                <p>Quick Donation:</p>
-                <div className="amount-buttons">
-                  {[500, 1000, 2000, 5000].map((amount) => (
-                    <button 
-                      key={amount} 
-                      onClick={() => setDonationAmount(amount)}
-                      aria-label={`Donate Rs. ${amount}`}
-                    >
-                      {amount.toLocaleString()}
-                    </button>
-                  ))}
-                </div>
-              </div>
-              
-              <div className="impact-stats">
-                <div className="stat-item">
-                  <FaUsers className="stat-icon" />
-                  <span>1,000+ families helped</span>
-                </div>
-                <div className="stat-item">
-                  <FaHome className="stat-icon" />
-                  <span>200+ shelters built</span>
-                </div>
-              </div>
-            </div>
-            
-            <button 
-              className="donate-button" 
-              onClick={handleMoneyDonation}
-              aria-label="Donate now"
-            >
-              <FaDonate className="button-icon" />
-              Donate Now
-            </button>
-            
-            <div className="security-badge">
-              <FaShieldAlt className="shield-icon" />
-              <span>100% Secure Donation</span>
-            </div>
           </div>
         </div>
-      </section>
+        
+        <div className="quick-donations">
+          <p>Quick Donation:</p>
+          <div className="amount-buttons">
+            <button onClick={() => setDonationAmount(500)}>500</button>
+            <button onClick={() => setDonationAmount(1000)}>1,000</button>
+            <button onClick={() => setDonationAmount(2000)}>2,000</button>
+            <button onClick={() => setDonationAmount(5000)}>5,000</button>
+          </div>
+        </div>
+        
+        <div className="impact-stats">
+          <div className="stat-item">
+            <FaUsers className="stat-icon" />
+            <span>1,000+ families helped</span>
+          </div>
+          <div className="stat-item">
+            <FaHome className="stat-icon" />
+            <span>200+ shelters built</span>
+          </div>
+        </div>
+      </div>
+      
+      <button className="donate-button" onClick={handleMoneyDonation}>
+        <FaDonate className="button-icon" />
+        Donate Now
+      </button>
+      
+      <div className="security-badge">
+        <FaShieldAlt className="shield-icon" />
+        <span>100% Secure Donation</span>
+      </div>
+    </div>
+  </div>
+</section>
     </div>
   );
 };

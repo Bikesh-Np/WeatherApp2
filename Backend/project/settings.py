@@ -4,7 +4,7 @@ from decouple import config, Csv
 import os
 import dj_database_url
 
-BASE_DIR = Path(__file__).resolve().parent.parent
+BASE_DIR = Path(__file__).resolve().parent.parent.parent  # adjust to your project root, e.g. .../project/../..
 
 # SECURITY
 SECRET_KEY = config('SECRET_KEY')
@@ -19,10 +19,11 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
     'rest_framework',
     'rest_framework_simplejwt',
     'corsheaders',
-    'app',
+    'app',  # Your app
 ]
 
 # MIDDLEWARE
@@ -43,7 +44,7 @@ ROOT_URLCONF = 'project.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [],  # Add template dirs here if any
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -58,15 +59,15 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'project.wsgi.application'
 
-# DATABASE
+# DATABASE (Use dj_database_url for flexibility)
 DATABASES = {
-    'default': dj_database_url.config(default=os.environ['DATABASE_URL'], conn_max_age=600)
+    'default': dj_database_url.config(default=os.environ.get('DATABASE_URL'), conn_max_age=600)
 }
 
-# USER MODEL
+# Custom User Model
 AUTH_USER_MODEL = 'app.CustomUser'
 
-# PASSWORD VALIDATION
+# Password validation
 AUTH_PASSWORD_VALIDATORS = [
     {'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator'},
     {'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator'},
@@ -74,19 +75,20 @@ AUTH_PASSWORD_VALIDATORS = [
     {'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator'},
 ]
 
-# I18N
+# Internationalization
 LANGUAGE_CODE = 'en-us'
 TIME_ZONE = 'UTC'
 USE_I18N = True
 USE_TZ = True
 
-# STATIC / MEDIA
+# Static & Media files
 STATIC_URL = '/static/'
 STATIC_ROOT = BASE_DIR / 'staticfiles'
+
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
 
-# REST FRAMEWORK & JWT
+# REST Framework & JWT Settings
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
         'rest_framework_simplejwt.authentication.JWTAuthentication',
@@ -100,28 +102,29 @@ SIMPLE_JWT = {
     "BLACKLIST_AFTER_ROTATION": True,
 }
 
-# CORS
+# CORS Settings
 CORS_ALLOWED_ORIGINS = [
     "https://resqlinkfront.netlify.app",
     "https://resqlink-frontend.onrender.com",
-    "http://localhost:3000"
+    "http://localhost:3000",
 ]
+
 CORS_ALLOW_CREDENTIALS = True
 
-# EMAIL
-
+# Email Configuration (Use environment variables or .env)
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = 'smtp.gmail.com' 
+EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
-EMAIL_HOST_USER = 'resqlinkmanagement@gmail.com'  
-EMAIL_HOST_PASSWORD = 'pvzq wqrr gezj bnpz' 
+EMAIL_HOST_USER = config('EMAIL_HOST_USER', default='resqlinkmanagement@gmail.com')
+EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD', default='your-password')  # use env var securely!
 
 # Twilio Configurations
-TWILIO_ACCOUNT_SID = config('TWILIO_ACCOUNT_SID')
-TWILIO_AUTH_TOKEN = config('TWILIO_AUTH_TOKEN')
-TWILIO_PHONE_NUMBER = config('TWILIO_PHONE_NUMBER')
-# LOGGING
+TWILIO_ACCOUNT_SID = config('TWILIO_ACCOUNT_SID', default='')
+TWILIO_AUTH_TOKEN = config('TWILIO_AUTH_TOKEN', default='')
+TWILIO_PHONE_NUMBER = config('TWILIO_PHONE_NUMBER', default='')
+
+# Logging
 LOGGING = {
     'version': 1,
     'disable_existing_loggers': False,
