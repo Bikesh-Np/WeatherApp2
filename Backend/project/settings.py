@@ -1,6 +1,7 @@
 import os
 from pathlib import Path
 from datetime import timedelta
+import dj_database_url
 from decouple import config, Csv
 
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -62,14 +63,10 @@ TEMPLATES = [
 WSGI_APPLICATION = 'project.wsgi.application'
 
 DATABASES = {
-    'default': {
-        "ENGINE": "django.db.backends.postgresql",
-        "NAME": "resqlinksys",
-        "USER": "bikesh",
-        "PASSWORD": "bikesh",
-        "HOST": "127.0.0.1",
-        "PORT": "5432",
-    }
+    'default': dj_database_url.config(
+        default='postgresql://bikesh:10TcP4pm2XdhGhdXGsEcRgKovaV9zEUr@dpg-d0k6sgje5dus73bgv2e0-a.oregon-postgres.render.com/bikesh',
+        conn_max_age=600
+    )
 }
 
 AUTH_PASSWORD_VALIDATORS = [
