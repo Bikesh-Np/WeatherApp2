@@ -27,6 +27,12 @@ CORS_ALLOWED_ORIGINS = [
     "http://localhost:3000"
 ]
 
+# Static and Media files
+STATIC_URL = 'static/'
+STATIC_ROOT = BASE_DIR / 'staticfiles'  # For production
+MEDIA_URL = '/media/'
+MEDIA_ROOT = BASE_DIR / 'media'
+
 
 STORAGES = {
     "default":{
