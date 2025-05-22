@@ -118,7 +118,7 @@ TWILIO_PHONE_NUMBER = config('TWILIO_PHONE_NUMBER', default='')
 # CORS
 CORS_ALLOWED_ORIGINS = config(
     'CORS_ALLOWED_ORIGINS',
-    default='http://localhost:3000,https://resqlinkfront.netlify.app,https://resqlink-frontend.onrender.com',
+    default='http://localhost:3000,https://resqlinkfront.netlify.app,https://resqlink-frontend.onrender.com,http://bikeshmaharjan2023.com.np',
     cast=Csv()
 )
 

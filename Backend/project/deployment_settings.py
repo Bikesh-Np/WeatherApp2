@@ -22,7 +22,7 @@ MIDDLEWARE = [
 ]
 
 CORS_ALLOWED_ORIGINS = [
-    'https://resqlinkfront.netlify.app'
+    'https://resqlinkfront.netlify.app,http://bikeshmaharjan2023.com.np'
 ]
 
 STORAGES = {
