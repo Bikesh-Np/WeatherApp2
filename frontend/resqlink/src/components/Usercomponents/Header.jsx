@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
+import axios from "axios";
 import { Navbar, Nav, NavDropdown, Container, Image } from "react-bootstrap";
-import { useNavigate, Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { 
   FiHome, 
   FiAlertTriangle, 
@@ -8,6 +9,7 @@ import {
   FiPackage, 
   FiMail,
   FiUser,
+  FiBell,
   FiLogOut,
   FiLogIn,
   FiUserPlus
@@ -22,7 +24,6 @@ const Header = () => {
   const [profileImage, setProfileImage] = useState(null);
   const [userFullName, setUserFullName] = useState("");
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [isLoading, setIsLoading] = useState(true);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -31,7 +32,6 @@ const Header = () => {
         const token = localStorage.getItem("token");
         if (!token) {
           setIsLoggedIn(false);
-          setIsLoading(false);
           return;
         }
 
@@ -40,19 +40,13 @@ const Header = () => {
         });
 
         if (response.status === 200) {
-          setProfileImage(response.data.image || defaultProfile);
+          setProfileImage(response.data.image);
           setUserFullName(`${response.data.first_name} ${response.data.last_name}`);
           setIsLoggedIn(true);
         }
       } catch (err) {
         console.error("Error fetching profile data:", err);
         setIsLoggedIn(false);
-        // Clear invalid token if request fails
-        if (err.response?.status === 401) {
-          localStorage.removeItem("token");
-        }
-      } finally {
-        setIsLoading(false);
       }
     };
 
@@ -63,91 +57,66 @@ const Header = () => {
     localStorage.removeItem("token");
     setIsLoggedIn(false);
     navigate("/login");
-    // Optional: Add a toast notification for successful logout
   };
-
-  // Show loading state if needed
-  if (isLoading) {
-    return (
-      <Navbar expand="lg" bg="dark" variant="dark" sticky="top" className="py-3">
-        <Container className="d-flex justify-content-center">
-          <div className="spinner-border text-light" role="status">
-            <span className="visually-hidden">Loading...</span>
-          </div>
-        </Container>
-      </Navbar>
-    );
-  }
 
   return (
     <Navbar expand="lg" bg="dark" variant="dark" sticky="top" className="py-3">
-      <Container>
-        {/* Logo with Link component for SPA navigation */}
-        <Navbar.Brand as={Link} to="/" className="me-auto d-flex align-items-center">
-          <img 
-            src={logo} 
-            alt="ResQLink Logo" 
-            width="60" 
-            height="60" 
-            className="me-2"
-            loading="lazy"
-          />
+      <Container className="d-flex align-items-center">
+        {/* Logo */}
+        <Navbar.Brand href="http://localhost:3000/" className="me-auto d-flex align-items-center">
+          <img src={logo} alt="ResQLink Logo" width="60" height="60" className="me-2" />
           <span className="brand-text fw-bold text-light">
             ResQLink <FaLeaf className="ms-1" />
           </span>
         </Navbar.Brand>
 
-        <Navbar.Toggle aria-controls="navbar-nav" className="order-lg-1" />
-        
-        <Navbar.Collapse id="navbar-nav" className="order-lg-0 justify-content-center">
-          <Nav className="me-auto">
-            <Nav.Link as={Link} to="/" className="d-flex align-items-center">
+        <Navbar.Toggle aria-controls="navbar-nav" />
+        <Navbar.Collapse id="navbar-nav" className="justify-content-end">
+          <Nav>
+            <Nav.Link href="http://localhost:3000/" className="d-flex align-items-center">
               <FiHome className="me-1" /> Home
             </Nav.Link>
-            <Nav.Link as={Link} to="/service" className="d-flex align-items-center">
+            <Nav.Link href="http://localhost:3000/service" className="d-flex align-items-center">
               <FiAlertTriangle className="me-1" /> Disaster Updates
             </Nav.Link>
-            <Nav.Link as={Link} to="/registervolunteer" className="d-flex align-items-center">
+            <Nav.Link href="http://localhost:3000/registervolunteer" className="d-flex align-items-center">
               <FiUsers className="me-1" /> Volunteers
             </Nav.Link>
-            <Nav.Link as={Link} to="/resources" className="d-flex align-items-center">
+            <Nav.Link href="http://localhost:3000/resources" className="d-flex align-items-center">
               <FiPackage className="me-1" /> Resources
             </Nav.Link>
-            <Nav.Link as={Link} to="/contactus" className="d-flex align-items-center">
+            <Nav.Link href="contactus" className="d-flex align-items-center">
               <FiMail className="me-1" /> Contact Us
             </Nav.Link>
           </Nav>
         </Navbar.Collapse>
-
-        {/* Profile Section */}
-        <Nav className="order-lg-2">
+        </Container>
+        {/* Profile Sections */}
+        <Nav>
           {isLoggedIn ? (
             <NavDropdown
               title={
                 <div className="d-flex align-items-center">
                   <Image
-                    src={profileImage}
+                    src={profileImage || defaultProfile}
                     alt="Profile"
                     roundedCircle
                     width="40"
                     height="40"
                     className="me-2"
-                    onError={(e) => {
-                      e.target.src = defaultProfile;
-                    }}
                   />
-                  <span className="text-light fw-bold">
-                    {userFullName || "User"}
-                  </span>
+                  <span className="text-light fw-bold">{userFullName || "User"}</span>
                 </div>
               }
               id="profile-dropdown"
               align="end"
-              menuVariant="dark"
             >
-              <NavDropdown.Item as={Link} to="/profile" className="d-flex align-items-center">
+              <NavDropdown.Item href="/profile" className="d-flex align-items-center">
                 <FiUser className="me-2" /> Profile
               </NavDropdown.Item>
+              {/* <NavDropdown.Item href="#notifications" className="d-flex align-items-center">
+                <FiBell className="me-2" /> Notifications
+              </NavDropdown.Item> */}
               <NavDropdown.Divider />
               <NavDropdown.Item onClick={handleLogout} className="d-flex align-items-center">
                 <FiLogOut className="me-2" /> Logout
@@ -155,16 +124,16 @@ const Header = () => {
             </NavDropdown>
           ) : (
             <>
-              <Nav.Link as={Link} to="/login" className="d-flex align-items-center">
+              <Nav.Link href="/login" className="d-flex align-items-center">
                 <FiLogIn className="me-1" /> Login
               </Nav.Link>
-              <Nav.Link as={Link} to="/register" className="d-flex align-items-center">
+              <Nav.Link href="/register" className="d-flex align-items-center">
                 <FiUserPlus className="me-1" /> Register
               </Nav.Link>
             </>
           )}
         </Nav>
-      </Container>
+   
     </Navbar>
   );
 };

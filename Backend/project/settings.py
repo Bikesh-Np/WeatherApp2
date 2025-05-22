@@ -4,7 +4,7 @@ from decouple import config, Csv
 import os
 import dj_database_url
 
-BASE_DIR = Path(__file__).resolve().parent.parent.parent  # adjust to your project root, e.g. .../project/../..
+BASE_DIR = Path(__file__).resolve().parent.parent  # adjust to your project root, e.g. .../project/../..
 
 # SECURITY
 SECRET_KEY = config('SECRET_KEY')
