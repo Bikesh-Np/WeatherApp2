@@ -38,7 +38,7 @@ const Homepage = () => {
   ];
 
   useEffect(() => {
-    AxiosInstance
+    await AxiosInstance
       .get("/api/products")
       .then((res) => {
         setData(res.data);
