@@ -1,11 +1,14 @@
 import React, { useEffect, useState, useMemo } from "react";
 import { useNavigate } from "react-router-dom";
-import image1 from "../../img/1.png";
-import image2 from "../../img/2.jpeg";
-import image3 from "../../img/3.png";
 import { FaDonate, FaHandsHelping, FaUsers, FaHome, FaSearch, FaChevronLeft, FaChevronRight, FaTimes, FaHeart, FaShieldAlt } from "react-icons/fa";
 import "./Homepage.css";
 import AxiosInstance from "../../components/AxiosInstance";
+
+// Define base URL for API and media files
+const API_BASE_URL = process.env.REACT_APP_API_URL || "https://weatherapp2-1-v07l.onrender.com";
+const MEDIA_BASE_URL = process.env.NODE_ENV === 'development' 
+  ? 'http://localhost:8000' 
+  : API_BASE_URL;
 
 const Homepage = () => {
   const [data, setData] = useState([]);
@@ -18,24 +21,26 @@ const Homepage = () => {
   const [donationAmount, setDonationAmount] = useState('');
   const navigate = useNavigate();
 
+  // Carousel items with proper image paths
   const carouselItems = [
     {
-      image: image1,
+      image: `${MEDIA_BASE_URL}/media/carousel/1.png`,
       title: "Japanese Rescue Team Assesses Earthquake Damage in Nepal",
       description: "A Japanese rescue team arrived in Nepal to survey the devastation caused by the earthquake. Their assessment aims to support relief efforts and provide critical aid to affected communities."
     },
     {
-      image: image2,
+      image: `${MEDIA_BASE_URL}/media/carousel/2.jpeg`,
       title: "Open Mic Nepal: Fighting Misinformation Post-Earthquake",
       description: "In response to the 2015 earthquake, Internews launched Open Mic Nepal to track and debunk misinformation. Collaborating with local organizations and journalists, the project delivered verified information to counter harmful rumors."
     },
     {
-      image: image3,
+      image: `${MEDIA_BASE_URL}/media/carousel/3.png`,
       title: "Nepal's Flood Tragedy: A National Disaster",
       description: "Monsoon floods have claimed over 200 lives, leaving Nepal in crisis. With inadequate preparedness and delayed response, the government faces criticism for failing to protect citizens."
     }
   ];
 
+  // Fetch products from API
   useEffect(() => {
     const fetchProducts = async () => {
       try {
@@ -51,6 +56,7 @@ const Homepage = () => {
     fetchProducts();
   }, []);
 
+  // Auto-rotate carousel
   useEffect(() => {
     const interval = setInterval(() => {
       setActiveIndex(prev => (prev === carouselItems.length - 1 ? 0 : prev + 1));
@@ -58,6 +64,7 @@ const Homepage = () => {
     return () => clearInterval(interval);
   }, [carouselItems.length]);
 
+  // Filter products based on search and filters
   const filteredProducts = useMemo(() => {
     return data.filter(product => {
       const searchTermLower = searchTerm.toLowerCase();
@@ -74,6 +81,7 @@ const Homepage = () => {
     });
   }, [data, searchTerm, selectedCategory, priceRange]);
 
+  // Handle product donation
   const handleDonateClick = (product) => {
     localStorage.setItem("selectedProduct", JSON.stringify(product));
     setLoading(true);
@@ -83,6 +91,7 @@ const Homepage = () => {
     }, 1500);
   };
 
+  // Handle monetary donation
   const handleMoneyDonation = () => {
     const amount = parseFloat(donationAmount);
     if (amount && amount > 0) {
@@ -96,6 +105,7 @@ const Homepage = () => {
     }
   };
 
+  // Carousel navigation
   const nextSlide = () => {
     setActiveIndex((prev) => (prev === carouselItems.length - 1 ? 0 : prev + 1));
   };
@@ -104,6 +114,7 @@ const Homepage = () => {
     setActiveIndex((prev) => (prev === 0 ? carouselItems.length - 1 : prev - 1));
   };
 
+  // Price range handler
   const handlePriceChange = (e, index) => {
     const value = parseInt(e.target.value) || 0;
     const newPriceRange = [...priceRange];
@@ -114,6 +125,7 @@ const Homepage = () => {
     setPriceRange(newPriceRange);
   };
 
+  // Clear search and filters
   const clearSearch = () => setSearchTerm('');
   const resetAllFilters = () => {
     setSelectedCategory('');
@@ -123,6 +135,7 @@ const Homepage = () => {
 
   return (
     <div className="premium-home-container">
+      {/* Loading Overlay */}
       {loading && (
         <div className="premium-loading-overlay">
           <div className="premium-spinner">
@@ -134,6 +147,7 @@ const Homepage = () => {
         </div>
       )}
 
+      {/* Hero Carousel Section */}
       <section className="premium-carousel-section">
         <div className="premium-carousel">
           {carouselItems.map((item, index) => (
@@ -148,8 +162,11 @@ const Homepage = () => {
               <img 
                 src={item.image} 
                 className="premium-carousel-image" 
-                alt={item.title} 
-                loading={index === activeIndex ? "eager" : "lazy"}
+                alt={item.title}
+                onError={(e) => {
+                  e.target.src = `${MEDIA_BASE_URL}/media/fallback-carousel.jpg`;
+                  e.target.onerror = null;
+                }}
               />
               <div className="premium-carousel-overlay"></div>
               <div 
@@ -185,6 +202,7 @@ const Homepage = () => {
         </div>
       </section>
 
+      {/* Products Section */}
       <section className="premium-products-section">
         <div className="premium-section-header">
           <div className="header-text">
@@ -196,6 +214,7 @@ const Homepage = () => {
           </div>
         </div>
 
+        {/* Filters */}
         <div className="premium-filters-container">
           <div className="premium-search-container premium-filter-group">
             <label htmlFor="product-search">Search:</label>
@@ -260,6 +279,7 @@ const Homepage = () => {
           </button>
         </div>
 
+        {/* Products Grid */}
         {filteredProducts.length === 0 ? (
           <div className="premium-empty-state">
             <div className="empty-state-image" aria-hidden="true"></div>
@@ -272,11 +292,12 @@ const Homepage = () => {
               <div className="premium-product-card" key={item.id}>
                 <div className="product-image-container">
                   <img 
-                    src={item.image || "/images/placeholder-product.jpg"} 
-                    alt={item.product_name} 
-                    className="product-image" 
+                    src={item.image ? `${MEDIA_BASE_URL}${item.image}` : `${MEDIA_BASE_URL}/media/placeholder-product.jpg`}
+                    alt={item.product_name}
+                    className="product-image"
                     onError={(e) => {
-                      e.target.src = "/images/placeholder-product.jpg";
+                      e.target.src = `${MEDIA_BASE_URL}/media/placeholder-product.jpg`;
+                      e.target.onerror = null;
                     }}
                   />
                   <div className="product-tag">Popular</div>
@@ -309,6 +330,7 @@ const Homepage = () => {
         )}
       </section>
 
+      {/* Donation Section */}
       <section className="premium-products-section">
         <div className="premium-section-header">
           <div className="header-text">
@@ -323,10 +345,14 @@ const Homepage = () => {
         <div className="relief-container">
           <div className="relief-image-wrapper">
             <img 
-              src="https://images.unsplash.com/photo-1582213782179-e0d53f98f2ca?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" 
-              alt="Disaster victims receiving aid" 
+              src={`${MEDIA_BASE_URL}/media/disaster-aid.jpg`}
+              alt="Disaster victims receiving aid"
               className="relief-image"
               loading="lazy"
+              onError={(e) => {
+                e.target.src = `${MEDIA_BASE_URL}/media/fallback-disaster.jpg`;
+                e.target.onerror = null;
+              }}
             />
             <div className="image-overlay">
               <h3>Your Help Matters</h3>
