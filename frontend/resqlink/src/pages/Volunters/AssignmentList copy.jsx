@@ -28,7 +28,7 @@ const AssignmentList = () => {
 
   const handleDelete = async (id) => {
     try {
-      await axios.delete(`http://127.0.0.1:8000/assignments/${id}/`);
+      await axios.delete(`/assignments/${id}/`);
       setAssignments(assignments.filter(assignment => assignment.id !== id));
     } catch (err) {
       setError("Failed to delete assignment.");

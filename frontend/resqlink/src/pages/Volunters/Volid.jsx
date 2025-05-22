@@ -22,7 +22,7 @@ function Volid() {
       }
 
       try {
-        const response = await axios.get(`http://127.0.0.1:8000/api/volunteer/${email}/`);
+        const response = await axios.get(`/api/volunteer/${email}/`);
         if (response.data) {
           setVolunteer(response.data);
         } else {
@@ -133,7 +133,7 @@ function Volid() {
               <div className="eco-avatar-section">
                 <div className="eco-avatar-frame">
                   <Image
-                    src={volunteer.profile ? `http://127.0.0.1:8000${volunteer.profile}` : '/default-profile.png'}
+                    src={volunteer.profile ? `${volunteer.profile}` : '/default-profile.png'}
                     alt="Profile"
                     className="eco-avatar-image"
                     onError={(e) => {

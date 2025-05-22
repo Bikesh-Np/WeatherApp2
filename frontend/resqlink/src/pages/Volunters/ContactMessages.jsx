@@ -16,7 +16,7 @@ const ContactMessages = () => {
     useEffect(() => {
         const fetchMessages = async () => {
             try {
-                const response = await axios.get('http://127.0.0.1:8000/get-contact-messages/');
+                const response = await axios.get('/get-contact-messages/');
                 if (response.data.status === 'success') {
                     setMessages(response.data.messages);
                 } else {

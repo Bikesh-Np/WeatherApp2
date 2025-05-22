@@ -83,7 +83,7 @@ const AdminUserList = () => {
       }
 
       await axios.post(
-        `http://127.0.0.1:8000/verify-user/${userId}/`,
+        `/verify-user/${userId}/`,
         { is_verified: isChecked },
         {
           headers: {
@@ -117,7 +117,7 @@ const AdminUserList = () => {
         throw new Error("No authentication token found. Please log in.");
       }
 
-      await axios.delete(`http://127.0.0.1:8000/delete_user/${userId}/`, {
+      await axios.delete(`/delete_user/${userId}/`, {
         headers: {
           Authorization: `Bearer ${token}`,
           "Content-Type": "application/json",
@@ -189,7 +189,7 @@ const AdminUserList = () => {
       formDataToSend.append("phone", formData.phone);
 
       const response = await axios.put(
-        `http://127.0.0.1:8000/update-user/${selectedUser.id}/`,
+        `/update-user/${selectedUser.id}/`,
         formDataToSend,
         {
           headers: {

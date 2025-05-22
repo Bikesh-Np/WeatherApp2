@@ -57,8 +57,8 @@ const DisasterDashboard = () => {
     const fetchData = async () => {
       try {
         const [earthquakeRes, wildfireRes] = await Promise.all([
-          fetch('http://127.0.0.1:8000/api/disasters/earthquakes/'),
-          fetch('http://127.0.0.1:8000/api/disasters/wildfires/')
+          fetch('/api/disasters/earthquakes/'),
+          fetch('/api/disasters/wildfires/')
         ]);
 
         const [earthquakeData, wildfireData] = await Promise.all([

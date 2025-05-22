@@ -31,7 +31,7 @@ const VolunterProfile = () => {
   const fetchIndividualVolunteer = async () => {
     setIsFetching(true);
     try {
-      const response = await fetch(`http://127.0.0.1:8000/regvol/${id}/`);
+      const response = await fetch(`/regvol/${id}/`);
       if (response.ok) {
         const data = await response.json();
         setVolunteerData([data]);
@@ -49,7 +49,7 @@ const VolunterProfile = () => {
     if (!window.confirm("Are you sure you want to delete this volunteer?")) return;
     
     try {
-      const response = await fetch(`http://127.0.0.1:8000/regvol/${volunteerId}/`, {
+      const response = await fetch(`/regvol/${volunteerId}/`, {
         method: "DELETE",
       });
       if (response.ok) {
@@ -69,7 +69,7 @@ const VolunterProfile = () => {
   const verifyVolunteer = async (volunteerId) => {
     try {
       const response = await fetch(
-        `http://127.0.0.1:8000/regvol/${volunteerId}/verify/`,
+        `/regvol/${volunteerId}/verify/`,
         {
           method: "PATCH",
         }

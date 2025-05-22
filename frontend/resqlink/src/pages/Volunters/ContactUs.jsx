@@ -81,7 +81,7 @@ const ContactUs = () => {
         setSubmitStatus(null);
         
         try {
-            const response = await axios.post('http://127.0.0.1:8000/contact-us/', formData);
+            const response = await axios.post('/contact-us/', formData);
             setSubmitStatus({ success: true, message: response.data.message });
             setFormData({ 
                 name: '', 

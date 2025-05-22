@@ -18,7 +18,7 @@ function Vologin() {
     setError('');
 
     try {
-      const response = await axios.post('http://127.0.0.1:8000/api/volunteer/login/', {
+      const response = await axios.post('/api/volunteer/login/', {
         email,
         dob,
       });

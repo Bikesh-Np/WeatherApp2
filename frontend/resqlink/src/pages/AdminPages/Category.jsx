@@ -29,7 +29,7 @@ const Category = () => {
     const confirmDelete = window.confirm("Are you sure you want to delete this category?");
     if (confirmDelete) {
       try {
-        await axios.delete(`http://127.0.0.1:8000/updatecate/${id}/`);
+        await axios.delete(`/updatecate/${id}/`);
         setCategories(categories.filter((category) => category.id !== id));
         toast.success("Category deleted successfully");
       } catch (error) {
@@ -45,7 +45,7 @@ const Category = () => {
 
   const submitCategoryUpdate = async (id) => {
     try {
-      await axios.put(`http://127.0.0.1:8000/updatecate/${id}/`, {
+      await axios.put(`/updatecate/${id}/`, {
         category_name: editingCategoryName,
       });
 
