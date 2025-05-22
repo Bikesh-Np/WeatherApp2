@@ -15,8 +15,7 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
-# Make sure media folder exists
-os.makedirs(MEDIA_ROOT, exist_ok=True)
+MEDIA_ROOT.mkdir(parents=True, exist_ok=True)
 
 # CORS settings for frontend access
 CORS_ALLOWED_ORIGINS += [
