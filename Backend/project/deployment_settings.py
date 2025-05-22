@@ -37,7 +37,7 @@ STORAGES = {
 
 DATABASES = {
     'default': dj_database_url.config(
-        default= os.environ['postgresql://bikesh:10TcP4pm2XdhGhdXGsEcRgKovaV9zEUr@dpg-d0k6sgje5dus73bgv2e0-a.oregon-postgres.render.com/bikesh'], 
+        default= 'postgresql://bikesh:10TcP4pm2XdhGhdXGsEcRgKovaV9zEUr@dpg-d0k6sgje5dus73bgv2e0-a.oregon-postgres.render.com/bikesh', 
         conn_max_age=600
     )
 }

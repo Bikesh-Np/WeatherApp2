@@ -8,7 +8,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 SECRET_KEY = config('SECRET_KEY')
 DEBUG = config('DEBUG', default=False, cast=bool)
-ALLOWED_HOSTS = config('ALLOWED_HOSTS', default='localhost,127.0.0.1,https://resqlinkfront.netlify.app', cast=Csv())
+ALLOWED_HOSTS = config('ALLOWED_HOSTS', default='localhost,127.0.0.1,https://weatherapp2-1-v07l.onrender.com,https://resqlinkfront.netlify.app', cast=Csv())
 
 # Installed apps
 INSTALLED_APPS = [
@@ -70,7 +70,7 @@ WSGI_APPLICATION = 'project.wsgi.application'
 # DB
 DATABASES = {
     'default': dj_database_url.config(
-        default= os.environ['postgresql://bikesh:10TcP4pm2XdhGhdXGsEcRgKovaV9zEUr@dpg-d0k6sgje5dus73bgv2e0-a.oregon-postgres.render.com/bikesh'], 
+        default= 'postgresql://bikesh:10TcP4pm2XdhGhdXGsEcRgKovaV9zEUr@dpg-d0k6sgje5dus73bgv2e0-a.oregon-postgres.render.com/bikesh', 
         conn_max_age=600
     )
 }
