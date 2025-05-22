@@ -1,16 +1,14 @@
+import os
 from pathlib import Path
 from datetime import timedelta
 from decouple import config, Csv
-import os
-import dj_database_url
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 SECRET_KEY = config('SECRET_KEY')
 DEBUG = config('DEBUG', default=False, cast=bool)
-ALLOWED_HOSTS = config('ALLOWED_HOSTS', default='localhost,127.0.0.1,https://weatherapp2-1-v07l.onrender.com,https://resqlinkfront.netlify.app', cast=Csv())
+ALLOWED_HOSTS = config('ALLOWED_HOSTS', default='localhost,127.0.0.1,https://resqlinkfront.netlify.app,https://weatherapp2-1-v07l.onrender.com', cast=Csv())
 
-# Installed apps
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -20,26 +18,22 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'app',
     'rest_framework',
-    "corsheaders",
+    'corsheaders',
     'rest_framework_simplejwt',
 ]
 
-# Custom user model
 AUTH_USER_MODEL = 'app.CustomUser'
 
-# REST Framework
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
         'rest_framework_simplejwt.authentication.JWTAuthentication',
     )
 }
 
-# Middleware
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
-    'corsheaders.middleware.CorsMiddleware',
-    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -67,14 +61,17 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'project.wsgi.application'
 
-# DB
 DATABASES = {
-    'default': dj_database_url.config(
-        default= 'postgresql://bikesh:10TcP4pm2XdhGhdXGsEcRgKovaV9zEUr@dpg-d0k6sgje5dus73bgv2e0-a.oregon-postgres.render.com/bikesh', 
-        conn_max_age=600
-    )
+    'default': {
+        "ENGINE": "django.db.backends.postgresql",
+        "NAME": "resqlinksys",
+        "USER": "bikesh",
+        "PASSWORD": "bikesh",
+        "HOST": "127.0.0.1",
+        "PORT": "5432",
+    }
 }
-# Password validators
+
 AUTH_PASSWORD_VALIDATORS = [
     {'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator'},
     {'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator'},
@@ -87,14 +84,22 @@ TIME_ZONE = 'UTC'
 USE_I18N = True
 USE_TZ = True
 
-# Static & Media
+# STATIC & MEDIA
 STATIC_URL = '/static/'
 STATIC_ROOT = BASE_DIR / 'staticfiles'
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
 
-# JWT settings
+# For Render: serve media files
+if not DEBUG:
+    import mimetypes
+    mimetypes.add_type("application/javascript", ".js", True)
+
+DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+CORS_ALLOWED_ORIGINS = config('CORS_ALLOWED_ORIGINS', default='http://localhost:3000,https://resqlinkfront.netlify.app', cast=Csv())
+
 SIMPLE_JWT = {
     "ACCESS_TOKEN_LIFETIME": timedelta(minutes=15),
     "REFRESH_TOKEN_LIFETIME": timedelta(days=7),
@@ -102,24 +107,13 @@ SIMPLE_JWT = {
     "BLACKLIST_AFTER_ROTATION": True,
 }
 
-# Email
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
-EMAIL_HOST_USER = config('EMAIL_HOST_USER', default='resqlinkmanagement@gmail.com')
-EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD', default='your-app-password')
+EMAIL_HOST_USER = 'resqlinkmanagement@gmail.com'
+EMAIL_HOST_PASSWORD = 'pvzq wqrr gezj bnpz'
 
-# Twilio
-TWILIO_ACCOUNT_SID = config('TWILIO_ACCOUNT_SID', default='')
-TWILIO_AUTH_TOKEN = config('TWILIO_AUTH_TOKEN', default='')
-TWILIO_PHONE_NUMBER = config('TWILIO_PHONE_NUMBER', default='')
-
-# CORS
-CORS_ALLOWED_ORIGINS = config(
-    'CORS_ALLOWED_ORIGINS',
-    default='http://localhost:3000,https://resqlinkfront.netlify.app,https://resqlink-frontend.onrender.com,http://bikeshmaharjan2023.com.np',
-    cast=Csv()
-)
-
-DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+TWILIO_ACCOUNT_SID = config('TWILIO_ACCOUNT_SID')
+TWILIO_AUTH_TOKEN = config('TWILIO_AUTH_TOKEN')
+TWILIO_PHONE_NUMBER = config('TWILIO_PHONE_NUMBER')
